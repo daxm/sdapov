@@ -3,9 +3,9 @@ MAINTAINER Dax Mickelson (dmickels@cisco.com)
 
 # Configure Script and GIT variables
 ENV PYTHON_SCRIPT configure_fmc.py
-ENV GIT_REPO https://github.com/dmickels/Cisco-SDA-Setup-Notes.git
+ENV GIT_REPO https://github.com/dmickels/sdapov.git
 ENV GIT_BRANCH selfservelabs
-ENV SCRIPT_PATH Cisco-SDA-Setup-Notes/fmc_scripts
+ENV SCRIPT_PATH docker/fmc_config
 
 WORKDIR /usr/src/app
 
