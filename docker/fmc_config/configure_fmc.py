@@ -23,10 +23,10 @@ def main():
         border1 = fmcapi.NetworkAddresses(fmc=fmc1, name='Border-1', value='100.126.1.13')
         border1.post()
 
-        finance = fmcapi.NetworkAddresses(fmc=fmc1, name='finance.dcloud.cisco.com', value='100.64.0.134')
+        finance = fmcapi.NetworkAddresses(fmc=fmc1, name='finance.selfserve.lab', value='100.64.0.134')
         finance.post()
 
-        pci = fmcapi.NetworkAddresses(fmc=fmc1, name='pci.dcloud.cisco.com', value='100.64.0.133')
+        pci = fmcapi.NetworkAddresses(fmc=fmc1, name='pci.selfserve.lab', value='100.64.0.133')
         pci.post()
 
         ftd_border1_net = fmcapi.Networks(fmc=fmc1, name='FTD-Border1-net', value='100.126.1.12/30')
