@@ -1,4 +1,4 @@
-FROM dmickels/sdapov-baseimage:latest
+FROM dmickels/sdapov-baseimage:selfservelabs-latest
 MAINTAINER Dax Mickelson (dmickels@cisco.com)
 
 # Configure Script and GIT variables
