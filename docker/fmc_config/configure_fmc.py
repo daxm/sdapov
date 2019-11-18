@@ -10,6 +10,7 @@ def main():
     100.64.0.155 cisco123' has already been manually typed on the FTD's CLI.
     """
     with fmcapi.FMC(host='100.64.0.166', username='apiadmin', password='C1sco12345', autodeploy=True) as fmc1:
+        """
         # Create Security Zones
         sz1 = fmcapi.SecurityZones(fmc=fmc1)
         sz1.name = 'Restricted'
@@ -95,6 +96,7 @@ def main():
         rapid_threat_rule4.action = 'ALLOW'
         rapid_threat_rule4.enabled = True
         rapid_threat_rule4.post()
+        """
 
         # Add FTD device to FMC
         ftd1 = fmcapi.DeviceRecords(fmc=fmc1)
