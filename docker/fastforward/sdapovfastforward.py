@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 
 """
-AUTHOR: ANAND KANANI
-PURPOSE: THIS SCRIPT HELPS IN SDA POV DEMO CONFIGURATION FAST-FORWARDING.
-REQUIREMENTS: IT NEEDS PYTHON3 (NOT PYTHON2) INSTALLED. AND IT REQUIRES REACHABILITY TO THE DNAC, ISE, WLC.
-HOW TO USE: JUST DOWNLOAD AND EXECUTE THIS SCRIPT
-https://raw.githubusercontent.com/ankanani/sdapovfastforward/master/sdapovfastforward.py
+AUTHORs: ANAND KANANI and Dax Mickelson
+PURPOSE: This script helps in SDA PoV configuration (fast forwarding)
+REQUIREMENTS: DNAC, ISE, and WLC need to be routable/accessible.
+HOW TO USE: `docker run --rm --name sdapov-fastforward dmickels/sdapov-fastforwardscripts:selfservelabs-latest`
 """
 
 import os
@@ -15,7 +14,7 @@ import subprocess
 # critical variables are in uppercase
 GIT_REPO_URL = "https://github.com/daxm/sdapov.git"
 GIT_BRANCH = "selfservelabs"
-SCRIPT_WORK_DIR = "/usr/src/app/"
+SCRIPT_WORK_DIR = "/usr/src/app"
 SCRIPT_WORK_DIR_POSTMAN = f"{SCRIPT_WORK_DIR}/postman"
 
 """
