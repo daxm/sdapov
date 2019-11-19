@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-AUTHORs: ANAND KANANI and Dax Mickelson
+AUTHORs: Anand Kanani and Dax Mickelson
 PURPOSE: This script helps in SDA PoV configuration (fast forwarding)
 REQUIREMENTS: DNAC, ISE, and WLC need to be routable/accessible.
 HOW TO USE: `docker run --rm --name sdapov-fastforward dmickels/sdapov-fastforwardscripts:selfservelabs-latest`
