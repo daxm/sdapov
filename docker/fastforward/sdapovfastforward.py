@@ -21,7 +21,6 @@ SCRIPT_WORK_DIR_POSTMAN = f"{SCRIPT_WORK_DIR}/postman"
 Note: python3, node.js, newman are all presumed installed via the Dockerfile
 """
 
-
 # search for postman collections and ask the user to choose one
 print("\n")
 all_postman_collection_files = [
