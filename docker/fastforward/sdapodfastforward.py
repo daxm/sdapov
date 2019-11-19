@@ -11,30 +11,17 @@ https://raw.githubusercontent.com/ankanani/sdapovfastforward/master/sdapovfastfo
 import os
 import sys
 import subprocess
-import git
 
 # critical variables are in uppercase
-GIT_REPO_URL = "https://github.com/ankanani/sdapovfastforward.git"
+GIT_REPO_URL = "https://github.com/daxm/sdapov.git"
 GIT_BRANCH = "selfservelabs"
-SCRIPT_WORK_DIR = "/usr/src/app"
+SCRIPT_WORK_DIR = "/usr/src/app/sdapov/docker/fastforward"
 SCRIPT_WORK_DIR_POSTMAN = f"{SCRIPT_WORK_DIR}/postman"
 
 """
-Note: git, python3, node.js, newman are all presumed installed via the Dockerfile
+Note: python3, node.js, newman are all presumed installed via the Dockerfile
 """
 
-# clone git repo if not exists already
-try:
-    # repo = git.Repo.clone_from(GIT_REPO_URL, SCRIPT_WORK_DIR, branch=GIT_BRANCH)
-    repo = git.Repo(SCRIPT_WORK_DIR)
-    repo.remotes.origin.fetch()
-    repo.remotes.origin.pull()
-    repo.active_branch = GIT_BRANCH
-except Exception as e:
-    print(f"Error cloning git repo: {e}")
-    sys.exit(1)
-
-# now the core part
 # search for postman collections and ask the user to choose one
 print("\n")
 all_postman_collection_files = [
