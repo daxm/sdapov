@@ -117,7 +117,7 @@ def main():
         int101.get(name='GigabitEthernet0/0')
         int101.enabled = True
         int101.ifname = 'FTD-to-Fusion'
-        int101.sz(name=sz2.name)
+        int101.sz(name='Outside')
         int101.static(ipv4addr='100.127.101.254', ipv4mask=24)
         int101.put()
 
@@ -125,7 +125,7 @@ def main():
         int3004.get(name='GigabitEthernet0/1')
         int3004.enabled = True
         int3004.ifname = 'FTD-to-Border1'
-        int3004.sz(name=sz1.name)
+        int3004.sz(name='Restricted')
         int3004.static(ipv4addr='100.126.1.14', ipv4mask=30)
         int3004.put()
 
