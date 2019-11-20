@@ -14,7 +14,7 @@ import subprocess
 # critical variables are in uppercase
 GIT_REPO_URL = "https://github.com/daxm/sdapov.git"
 GIT_BRANCH = "selfservelabs"
-SCRIPT_WORK_DIR = "."
+SCRIPT_WORK_DIR = "/usr/src/app/sdapov/docker/fastforward"
 SCRIPT_WORK_DIR_POSTMAN = f"{SCRIPT_WORK_DIR}/postman"
 
 """
