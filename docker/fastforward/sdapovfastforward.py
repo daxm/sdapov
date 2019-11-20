@@ -87,7 +87,8 @@ def main():
     print("Executing API calls now...")
     cmd = [
         f"newman run {os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_collection_file)} "
-        f"-e {os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_environment_file)}"
+        f"-e {os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_environment_file)} "
+        f"-k"
     ]
     subprocess.call(cmd, shell=True)
 
