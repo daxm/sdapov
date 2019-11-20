@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-AUTHORs: Anand Kanani and Dax Mickelson
+AUTHORS: Anand Kanani and Dax Mickelson
 PURPOSE: This script helps in SDA PoV configuration (fast forwarding)
 REQUIREMENTS: DNAC, ISE, and WLC need to be accessible.
 HOW TO USE:
