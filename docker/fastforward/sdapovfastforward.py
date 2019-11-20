@@ -150,7 +150,6 @@ cmd = [
     "-e",
     os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_environment_file),
 ]
-print(cmd)
 subprocess.run(cmd, stdout=subprocess.PIPE, universal_newlines=True, shell=True)
 
 print("\n\n==> IF ALL API CALLS WORKED IN THE ABOVE RUN THEN YOU ARE ALL SET.\n")
