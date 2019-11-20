@@ -137,18 +137,6 @@ def main():
             print("ENTER EITHER YES/NO")
 
     print("\n\n==> EXECUTING NEWMAN NOW\n")
-    """
-    subprocess.call(
-        [
-            "newman",
-            "run",
-            os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_collection_file),
-            "-e",
-            os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_environment_file),
-        ],
-        shell=True,
-    )
-    """
     cmd = [
         "newman",
         "run",
@@ -156,7 +144,10 @@ def main():
         "-e",
         os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_environment_file),
     ]
+    subprocess.call(cmd, shell=True)
+    """
     subprocess.run(cmd, stdout=subprocess.PIPE, universal_newlines=True, shell=True)
+    """
 
     print("\n\n==> IF ALL API CALLS WORKED IN THE ABOVE RUN THEN YOU ARE ALL SET.\n")
     input("PRESS ENTER TO EXIT")
