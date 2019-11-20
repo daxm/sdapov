@@ -25,7 +25,7 @@ POSTMAN_ENVIRONMENT_FILTER = "postman_environment"
 
 def verify_continuation():
     while True:
-        a = input("\nWould you like to continue with this option? [y/n] ")
+        a = input("\nWould you like to continue? [y/n] ")
         if a.lower() in ["yes", "y"]:
             break
         elif a.lower() in ["no", "n"]:
