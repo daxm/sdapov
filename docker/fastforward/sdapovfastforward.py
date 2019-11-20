@@ -4,7 +4,10 @@
 AUTHORs: Anand Kanani and Dax Mickelson
 PURPOSE: This script helps in SDA PoV configuration (fast forwarding)
 REQUIREMENTS: DNAC, ISE, and WLC need to be accessible.
-HOW TO USE: `docker run --rm --name sdapov-fastforward dmickels/sdapov-fastforwardscripts:selfservelabs-latest`
+HOW TO USE:
+1.  `docker pull dmickels/sdapov-fastforwardscripts:selfservelabs-latest`
+2.  `docker stop fastforward`
+3.  `docker run -i --tty --rm --name fastforward dmickels/sdapov-fastforwardscripts:selfservelabs-latest`
 """
 
 import os
@@ -24,14 +27,14 @@ Note: python3, node.js, newman are all presumed installed via the Dockerfile
 
 def verify_continuation():
     while True:
-        a = input("\nWOULD YOU LIKE TO CONTINUE WITH THIS OPTION? [Y/N] ")
+        a = input("\nWould you like to continue with this option? [y/n]")
         if a.lower() in ["yes", "y"]:
             break
         elif a.lower() in ["no", "n"]:
-            input("PRESS ENTER TO EXIT")
+            input("Press ENTER to exit.")
             sys.exit(0)
         else:
-            print("ENTER EITHER YES/NO")
+            print("Input y or n.")
 
 
 def main():
@@ -44,16 +47,14 @@ def main():
         and "postman_collection" in f
     ]
     if len(all_postman_collection_files) > 0:
-        print("==> THE FOLLOWING POSTMAN COLLECTIONS WERE FOUND.")
+        print("POSTMAN COLLECTIONS:")
         count = 0
         for f in all_postman_collection_files:
             count += 1
-            print(f"{count} - {f}")
+            print(f"\t{count} - {f}")
     else:
-        print("==> COULD NOT FIND ANY FILE THAT APPEAR TO BE A POSTMAN COLLECTION!")
+        print("Warning: Could not find any Postman collections.")
         sys.exit(1)
-
-    selected_postman_collection_file = ""
 
     if len(all_postman_collection_files) == 1:
         selected_postman_collection_file = all_postman_collection_files[0]
@@ -64,19 +65,19 @@ def main():
             try:
                 a = int(
                     input(
-                        f"WHICH ONE WOULD YOU LIKE TO UTILIZE? [1-{len(all_postman_collection_files)}] "
+                        f"Choose a collection to run: [1-{len(all_postman_collection_files)}] "
                     )
                 )
                 selected_postman_collection_file = all_postman_collection_files[a - 1]
                 print(
-                    f"\nYOU HAVE SELECTED POSTMAN COLLECTION:- {selected_postman_collection_file}"
+                    f"\nYou selected the {selected_postman_collection_file} collection."
                 )
 
-                a = input("\nWOULD YOU LIKE TO CONTINUE WITH THIS OPTION? [Y/N] ")
+                a = input("\nContinue with this collection? [y/n]")
                 if a.lower() in ["yes", "y"]:
                     break
             except Exception as e:
-                print(f"THAT'S NOT A VALID OPTION!.  Error: {e}")
+                print(f"Invalid option.  Error: {e}")
 
     # search for postman environments and ask the user to choose one
     print("\n")
@@ -87,17 +88,15 @@ def main():
         and "postman_environment" in f
     ]
     if len(all_postman_environment_files) > 0:
-        print("==> THE FOLLOWING POSTMAN ENVIRONMENTS WERE FOUND.")
+        print("POSTMAN ENVIRONMENTS:")
         count = 0
         for f in all_postman_environment_files:
             count += 1
-            print(f"{count} - {f}")
+            print(f"\t{count} - {f}")
     else:
-        print("==> COULD NOT FIND ANY FILE THAT APPEAR TO BE A POSTMAN ENVIRONMENT!")
-        input("PRESS ENTER TO EXIT")
-        sys.exit(0)
+        print("Warning: Could not find any Postman environments.")
+        sys.exit(1)
 
-    selected_postman_environment_file = ""
     if len(all_postman_environment_files) == 1:
         selected_postman_environment_file = all_postman_environment_files[0]
         verify_continuation()
@@ -107,47 +106,44 @@ def main():
             try:
                 a = int(
                     input(
-                        f"WHICH ONE WOULD YOU LIKE TO UTILIZE? [1-len(all_postman_environment_files)] "
+                        f"Select an environment: [1-len(all_postman_environment_files)] "
                     )
                 )
                 selected_postman_environment_file = all_postman_environment_files[a - 1]
                 print(
-                    f"\nYOU HAVE SELECTED POSTMAN ENVIRONMENT:- {selected_postman_collection_file}"
+                    f"\nYou selected the {selected_postman_collection_file} environment."
                 )
 
-                a = input("\nWOULD YOU LIKE TO CONTINUE WITH THIS OPTION? [Y/N] ")
+                a = input("\nContinue with this environment? [y/n] ")
                 if a.lower() in ["yes", "y"]:
                     break
             except Exception as e:
-                print(f"THAT'S NOT A VALID OPTION!, {e}")
+                print(f"Invalid option.  Error: {e}")
 
     # Now lets run the "newman"
     while True:
         print(
-            f"\n==> WITH THE FOLLOWING SELECTION?\nPOSTMAN COLLECTION - {selected_postman_collection_file}"
-            f"\nPOSTMAN ENVIRONMENT - {selected_postman_environment_file}\n"
+            f"\nSelected options:\n"
+            f"\tPOSTMAN COLLECTION: {selected_postman_collection_file}\n"
+            f"\tPOSTMAN ENVIRONMENT: {selected_postman_environment_file}\n"
         )
-        a = input("\nARE YOU READY TO FAST FORWARD YOUR SDA POV? [Y/N] ")
+        a = input("\nFast forward the SDA PoV with these options? [y/n] ")
         if a.lower() in ["yes", "y"]:
             break
         elif a.lower() in ["no", "n"]:
-            input("PRESS ENTER TO EXIT")
+            print("Exiting...")
             sys.exit(0)
         else:
-            print("ENTER EITHER YES/NO")
+            print("Input y or n.")
 
-    print("\n\n==> EXECUTING NEWMAN NOW\n")
+    print("\n\nExecuting newman now...\n")
     cmd = [
         f"newman run {os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_collection_file)} "
         f"-e {os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_environment_file)}"
     ]
-    print(cmd)
     subprocess.call(cmd, shell=True)
-    """
-    subprocess.run(cmd, stdout=subprocess.PIPE, universal_newlines=True, shell=True)
-    """
 
-    print("\n\n==> IF ALL API CALLS WORKED IN THE ABOVE RUN THEN YOU ARE ALL SET.\n")
+    print("\n\nReview the output of the API calls to ensure they were all successful.\n")
     sys.exit(0)
 
 
