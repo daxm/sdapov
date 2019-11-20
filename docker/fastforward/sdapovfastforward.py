@@ -144,6 +144,7 @@ def main():
         "-e",
         os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_environment_file),
     ]
+    print(cmd)
     subprocess.call(cmd, shell=True)
     """
     subprocess.run(cmd, stdout=subprocess.PIPE, universal_newlines=True, shell=True)
