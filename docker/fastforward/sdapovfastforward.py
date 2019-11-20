@@ -131,6 +131,7 @@ while True:
         print("ENTER EITHER YES/NO")
 
 print("\n\n==> EXECUTING NEWMAN NOW\n")
+"""
 subprocess.call(
     [
         "newman",
@@ -141,6 +142,14 @@ subprocess.call(
     ],
     shell=True,
 )
+"""
+subprocess.run([
+    "newman",
+    "run",
+    os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_collection_file),
+    "-e",
+    os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_environment_file),
+], capture_output=True)
 
 print("\n\n==> IF ALL API CALLS WORKED IN THE ABOVE RUN THEN YOU ARE ALL SET.\n")
 input("PRESS ENTER TO EXIT")
