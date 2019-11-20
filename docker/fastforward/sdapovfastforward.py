@@ -138,11 +138,8 @@ def main():
 
     print("\n\n==> EXECUTING NEWMAN NOW\n")
     cmd = [
-        "newman",
-        "run",
-        os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_collection_file),
-        "-e",
-        os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_environment_file),
+        f"newman run {os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_collection_file)} "
+        f"-e {os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_environment_file)}"
     ]
     print(cmd)
     subprocess.call(cmd, shell=True)
@@ -151,7 +148,6 @@ def main():
     """
 
     print("\n\n==> IF ALL API CALLS WORKED IN THE ABOVE RUN THEN YOU ARE ALL SET.\n")
-    input("PRESS ENTER TO EXIT")
     sys.exit(0)
 
 
