@@ -73,6 +73,7 @@ def make_selection(postman_option):
 
 
 def main():
+    print(f"Updating local repo of Postman files.")
     repo = git.cmd.Git(SCRIPT_WORK_DIR_POSTMAN)
     repo.pull()
 
