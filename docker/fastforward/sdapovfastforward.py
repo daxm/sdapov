@@ -28,7 +28,7 @@ POSTMAN_ENVIRONMENT_FILTER = "postman_environment"
 
 def verify_continuation():
     while True:
-        a = input("\nWould you like to continue? [y/n] ")
+        a = input("Would you like to continue? [y/n] ")
         if a.lower() in ["yes", "y"]:
             break
         elif a.lower() in ["no", "n"]:
@@ -64,7 +64,7 @@ def make_selection(postman_option):
             try:
                 a = int(input(f"Choose an option: [1-{len(postman_files)}] "))
                 selected_postman_file = postman_files[a - 1]
-                print(f"You selected the {selected_postman_file}.")
+                print(f"You selected the {selected_postman_file}.\n")
                 # verify_continuation()
                 return selected_postman_file
 
