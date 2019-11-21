@@ -21,7 +21,7 @@ GIT_BRANCH = "selfservelabs"
 
 TOP_LEVEL_DIR = "/usr/src/app"
 SCRIPT_WORK_DIR = f"{TOP_LEVEL_DIR}/sdapov/docker/fastforward"
-SCRIPT_WORK_DIR_POSTMAN = f"{SCRIPT_WORK_DIR}/sdapovfastforward-postman"
+SCRIPT_WORK_DIR_POSTMAN = f"{TOP_LEVEL_DIR}/sdapovfastforward-postman"
 POSTMAN_COLLECTION_FILTER = "postman_collection"
 POSTMAN_ENVIRONMENT_FILTER = "postman_environment"
 
