@@ -14,11 +14,14 @@ Note: python3, node.js, newman are all presumed installed via the Dockerfile
 import os
 import sys
 import subprocess
+import git
 
-GIT_REPO_URL = "https://github.com/daxm/sdapov.git"
+POSTMAN_REPO = "https://github.com/ankanani/sdapovfastforward-postman"
 GIT_BRANCH = "selfservelabs"
-SCRIPT_WORK_DIR = "/usr/src/app/sdapov/docker/fastforward"
-SCRIPT_WORK_DIR_POSTMAN = f"{SCRIPT_WORK_DIR}/postman"
+
+TOP_LEVEL_DIR = "/usr/src/app"
+SCRIPT_WORK_DIR = f"{TOP_LEVEL_DIR}/sdapov/docker/fastforward"
+SCRIPT_WORK_DIR_POSTMAN = f"{SCRIPT_WORK_DIR}/sdapovfastforward-postman"
 POSTMAN_COLLECTION_FILTER = "postman_collection"
 POSTMAN_ENVIRONMENT_FILTER = "postman_environment"
 
@@ -70,6 +73,9 @@ def make_selection(postman_option):
 
 
 def main():
+    repo = git.cmd.Git(SCRIPT_WORK_DIR_POSTMAN)
+    repo.pull()
+
     # search for postman collections and ask the user to choose one
     selected_postman_collection_file = make_selection(postman_option=POSTMAN_COLLECTION_FILTER)
 
@@ -86,8 +92,8 @@ def main():
 
     print("Executing API calls now...")
     cmd = [
-        f"newman run {os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_collection_file)} "
-        f"-e {os.path.join(SCRIPT_WORK_DIR_POSTMAN, selected_postman_environment_file)} "
+        f"newman run {SCRIPT_WORK_DIR_POSTMAN}/{selected_postman_collection_file} "
+        f"-e {SCRIPT_WORK_DIR_POSTMAN}/{selected_postman_environment_file} "
         f"-k"
     ]
     subprocess.call(cmd, shell=True)
