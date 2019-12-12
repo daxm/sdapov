@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 """
+Use Postman to configure DNA Center.
+
 AUTHORS: Anand Kanani and Dax Mickelson
 PURPOSE: This script helps in SDA PoV configuration (fast forwarding)
 REQUIREMENTS: DNAC, ISE, and WLC need to be accessible.
@@ -27,6 +29,7 @@ POSTMAN_ENVIRONMENT_FILTER = "postman_environment"
 
 
 def verify_continuation():
+    """Query user for continuance."""
     while True:
         a = input("Would you like to continue? [y/n] ")
         if a.lower() in ["yes", "y"]:
@@ -39,6 +42,7 @@ def verify_continuation():
 
 
 def make_selection(postman_option):
+    """Select which scripts to load."""
     # search for postman collection/environment and ask the user to choose one
     postman_files = [
         f
@@ -73,6 +77,7 @@ def make_selection(postman_option):
 
 
 def main():
+    """Run Main."""
     print(f"Updating local repo of Postman files.")
     repo = git.cmd.Git(SCRIPT_WORK_DIR_POSTMAN)
     repo.pull()

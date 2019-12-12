@@ -1,11 +1,12 @@
-"""
-Program SDA Security PoV's FMC and FTD for this PoV.
-"""
+"""Program SDA Security PoV's FMC and FTD for this PoV."""
+
 import fmcapi
 
 
 def main():
     """
+    Configure FTD.
+
     The FTD device already has 100.127.100.15 on its management interface and the command 'configure network manager
     100.64.0.155 cisco123' has already been manually typed on the FTD's CLI.
     """
