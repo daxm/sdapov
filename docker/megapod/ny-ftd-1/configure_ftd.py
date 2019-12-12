@@ -10,7 +10,6 @@ def main():
         username="apiadmin",
         password="C1sco12345",
         autodeploy=True,
-        file_logging="ny-ftd-1.log",
     ) as fmc:
 
         # Create ACP.
