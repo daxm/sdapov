@@ -13,7 +13,7 @@ def main():
     ) as fmc:
 
         # Create ACP.
-        acp = fmcapi.AccessPolicies(fmc=fmc, name="Initial Policy")
+        acp = fmcapi.AccessPolicies(fmc=fmc, name="Initial_Policy")
         acp.defaultAction = "BLOCK"
         acp.post()
 
@@ -27,10 +27,10 @@ def main():
 
         # Create Network Objects
         example_org_network = fmcapi.Networks(
-            fmc=fmc, name="Example Org LANs", value="10.0.0.0/8"
+            fmc=fmc, name="Example_Org_LANs", value="10.0.0.0/8"
         )
         example_org_network.post()
-        fusion_gw = fmcapi.Hosts(fmc=fmc, name="Fusion GW", value="10.100.255.81")
+        fusion_gw = fmcapi.Hosts(fmc=fmc, name="Fusion_GW", value="10.100.255.81")
         fusion_gw.post()
 
         # Create Access Control Policy Rules
