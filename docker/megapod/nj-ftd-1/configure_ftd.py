@@ -1,4 +1,4 @@
-"""Configure ny-ftd-1 via fmcapi."""
+"""Configure nj-ftd-1 via fmcapi."""
 
 import fmcapi
 
@@ -12,57 +12,26 @@ def main():
         autodeploy=True,
     ) as fmc:
 
-        # Create ACP.
+        # Load already built values in FMC.
         acp = fmcapi.AccessPolicies(fmc=fmc, name="Initial_Policy")
-        acp.defaultAction = "BLOCK"
-        acp.post()
-
-        # Create Security Zones
-        sz_inside = fmcapi.SecurityZones(fmc=fmc, name="inside", interfaceMode="ROUTED")
-        sz_inside.post()
-        sz_outside = fmcapi.SecurityZones(
-            fmc=fmc, name="outside", interfaceMode="ROUTED"
-        )
-        sz_outside.post()
-
-        # Create Network Objects
-        example_org_network = fmcapi.Networks(
-            fmc=fmc, name="Example_Org_LANs", value="10.0.0.0/8"
-        )
-        example_org_network.post()
-        fusion_gw = fmcapi.Hosts(fmc=fmc, name="Fusion_GW", value="10.100.255.81")
-        fusion_gw.post()
-
-        # Create Access Control Policy Rules
-        init_rule = fmcapi.AccessRules(
-            fmc=fmc, name="Permit Example Org LANs", action="ALLOW", enabled=True
-        )
-        init_rule.acp(name=acp.name)
-        init_rule.source_network(action="add", name=example_org_network.name)
-        init_rule.source_zone(action="add", name=sz_inside.name)
-        init_rule.destination_zone(action="add", name=sz_outside.name)
-        init_rule.post()
-
-        # Build NAT Policy
+        acp.get()
+        sz_inside = fmcapi.SecurityZones(fmc=fmc, name="inside")
+        sz_inside.get()
+        sz_outside = fmcapi.SecurityZones(fmc=fmc, name="outside")
+        sz_outside.get()
+        example_org_network = fmcapi.Networks(fmc=fmc, name="Example_Org_LANs")
+        example_org_network.get()
+        fusion_gw = fmcapi.Hosts(fmc=fmc, name="Fusion_GW")
+        fusion_gw.get()
         nat = fmcapi.FTDNatPolicies(fmc=fmc, name="Example Org NAT Policy")
-        nat.post()
+        nat.get()
 
-        # Build NAT Policy Rules.
-        autonat = fmcapi.AutoNatRules(fmc=fmc)
-        autonat.natType = "DYNAMIC"
-        autonat.interfaceInTranslatedNetwork = True
-        autonat.original_network(example_org_network.name)
-        autonat.source_intf(name=sz_inside.name)
-        autonat.destination_intf(name=sz_outside.name)
-        autonat.nat_policy(name=nat.name)
-        autonat.post()
-
-        # Register ny-ftd-1 to FMC
+        # Register nj-ftd-1 to FMC
         ftd = fmcapi.DeviceRecords(fmc=fmc)
-        ftd.hostName = "10.100.255.82"
+        ftd.hostName = "10.100.255.82"  # FIXME
         ftd.regKey = "C1sco12345"
         ftd.acp(name=acp.name)
-        ftd.name = "ny-ftd-1"
+        ftd.name = "nj-ftd-1"
         ftd.licensing(action="add", name="BASE")
         ftd.licensing(action="add", name="MALWARE")
         ftd.licensing(action="add", name="VPN")
@@ -70,12 +39,12 @@ def main():
         ftd.licensing(action="add", name="URLFilter")
         ftd.post(post_wait_time=300)
 
-        # Configure ny-ftd-1 interfaces
+        # Configure nj-ftd-1 interfaces
         g0 = fmcapi.PhysicalInterfaces(fmc=fmc, device_name=ftd.name)
         g0.get(name="GigabitEthernet0/0")
         g0.enabled = True
         g0.ifname = "IN"
-        g0.static(ipv4addr="10.100.255.83", ipv4mask=29)
+        g0.static(ipv4addr="10.100.255.83", ipv4mask=29)  # FIXME
         g0.sz(name=sz_inside.name)
         g0.put()
         g1 = fmcapi.PhysicalInterfaces(fmc=fmc, device_name=ftd.name)
@@ -95,7 +64,7 @@ def main():
         lan_route.metricValue = 1
         lan_route.post()
 
-        # Associate NAT Policy with ny-ftd-1
+        # Associate NAT Policy with nj-ftd-1
         devices = [{"name": ftd.name, "type": "device"}]
         assign_nat = fmcapi.PolicyAssignments(fmc=fmc)
         assign_nat.ftd_natpolicy(name=nat.name, devices=devices)
