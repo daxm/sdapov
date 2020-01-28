@@ -8,7 +8,7 @@ ENV GIT_BRANCH dnacentersdk
 ENV WORK_DIR /usr/src/app
 ENV SCRIPT_PATH $WORK_DIR/sdapov/docker/fastforward
 #ENV PYTHON_SCRIPT sdapovfastforward.py
-ENV PYTHON_SCRIPT dnacenterskd.py
+ENV PYTHON_SCRIPT dnacentersdk.py
 
 # Clone repos.
 WORKDIR $WORK_DIR
