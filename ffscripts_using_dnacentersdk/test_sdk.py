@@ -9,7 +9,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 which_dnac = "devnet"
 devnet = {
     "debug": False,
-    "username": "Kiskande",
+    "username": "devnetuser",
     "password": "Cisco123!",
     "base_url": "https://sandboxdnac2.cisco.com:443",
     "public_cert": False,

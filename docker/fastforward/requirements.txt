@@ -1,1 +1,3 @@
 GitPython
+dnacentersdk
+requests
