@@ -19,14 +19,5 @@ RUN apt-get -y autoclean
 # Install Python modules
 RUN apt-get -y install python3 python3-pip
 
-# Install node.js
-RUN apt-get install -y nodejs
-
-# Install npm
-RUN apt-get install -y npm
-
-# Install newman
-RUN npm install -g newman
-
 # Install get
 RUN apt-get install -y git
