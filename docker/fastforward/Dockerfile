@@ -7,7 +7,8 @@ ENV CODE_REPO https://github.com/daxm/sdapov.git
 ENV GIT_BRANCH dnacentersdk
 ENV WORK_DIR /usr/src/app
 ENV SCRIPT_PATH $WORK_DIR/sdapov/docker/fastforward
-ENV PYTHON_SCRIPT sdapovfastforward.py
+#ENV PYTHON_SCRIPT sdapovfastforward.py
+ENV PYTHON_SCRIPT dnacenterskd.py
 
 # Clone repos.
 WORKDIR $WORK_DIR
@@ -19,4 +20,5 @@ RUN python3 -m pip install --no-cache-dir -r $SCRIPT_PATH/requirements.txt
 
 # Run script.
 WORKDIR $SCRIPT_PATH
-CMD python3 $PYTHON_SCRIPT
+#CMD python3 $PYTHON_SCRIPT
+CMD python3 scripts/$PYTHON_SCRIPT
