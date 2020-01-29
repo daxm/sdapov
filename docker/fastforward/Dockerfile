@@ -1,9 +1,9 @@
-FROM dmickels/sdapov-baseimage:dnacentersdk
+FROM dmickels/sdapov-baseimage:selfservelabs-latest
 MAINTAINER Dax Mickelson (dmickels@cisco.com)
 
 # Configure Script and GIT variables
 ENV CODE_REPO https://github.com/daxm/sdapov.git
-ENV GIT_BRANCH dnacentersdk
+ENV GIT_BRANCH selfservelabs
 ENV WORK_DIR /usr/src/app
 ENV SCRIPT_PATH $WORK_DIR/sdapov/docker/fastforward
 ENV PYTHON_SCRIPT bootstrap.py
