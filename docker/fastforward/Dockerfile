@@ -6,7 +6,7 @@ ENV CODE_REPO https://github.com/daxm/sdapov.git
 ENV GIT_BRANCH dnacentersdk
 ENV WORK_DIR /usr/src/app
 ENV SCRIPT_PATH $WORK_DIR/sdapov/docker/fastforward
-ENV PYTHON_SCRIPT dnacenterscript.py
+ENV PYTHON_SCRIPT bootstrap.py
 
 # Clone repos.
 WORKDIR $WORK_DIR
