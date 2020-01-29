@@ -17,4 +17,4 @@ RUN python3 -m pip install --no-cache-dir -r $SCRIPT_PATH/requirements.txt
 
 # Run script.
 WORKDIR $SCRIPT_PATH
-CMD python3 /usr/src/app/scripts/$PYTHON_SCRIPT
+CMD python3 $SCRIPT_PATH/$PYTHON_SCRIPT
