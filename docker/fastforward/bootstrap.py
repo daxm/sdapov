@@ -27,6 +27,8 @@ if list_of_scripts:
         if 0 <= choice <= qty_of_scripts:
             # A valid choice has been made.
             os.system(f"/usr/bin/python3 {os.path.join(script_dir, list_of_scripts[choice])}")
+        else:
+            print("Inputted value out of range.")
     except ValueError:
         print("Inputted value out of range.")
 else:
