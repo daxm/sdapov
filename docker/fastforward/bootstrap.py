@@ -10,7 +10,7 @@ files_in_dir = os.listdir(script_dir)
 list_of_scripts = []
 # Ensure that we only show the python files.  (Those ending in .py)
 for file in files_in_dir:
-    if file[-3:] == ".py" and file != "__init__.py":
+    if file[-3:] == ".py" and "__" not in file:
         list_of_scripts.append(file)
 
 # Sort list alphabetically by filename.

@@ -1,12 +1,11 @@
 """Testing the use of dnacentersdk Python package."""
-from __future__ import absolute_import
 from dnacentersdk import DNACenterAPI
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import logging
 from ruamel.yaml import YAML
 from pathlib import Path
-from subroutines import network_discovery
+from .__subroutines import get_snmp_properties, get_cli_user_id
 
 # Disable annoying HTTP warnings
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -36,12 +35,12 @@ def initial_discover(api, data_vars):
     Perform initial discovery to get cp-border-1, cp-border-2, and edge-1 into DNA Center.
     """
     # Gather IDs for credentials list
-    data_vars["credentials"]["cli"]["id"] = network_discovery.get_cli_user_id(
+    data_vars["credentials"]["cli"]["id"] = get_cli_user_id(
         api=api,
         credentials=data_vars["credentials"]["cli"]
     )
 
-    snmp_info = network_discovery.get_snmp_properties(api=api)
+    snmp_info = get_snmp_properties(api=api)
     print(snmp_info)
     snmp_ro_id = None
     snmp_rw_id = None
