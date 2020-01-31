@@ -19,5 +19,8 @@ RUN apt-get -y autoclean
 # Install Python modules
 RUN apt-get -y install python3 python3-pip
 
-# Install get
+# Install git
 RUN apt-get install -y git
+
+# Install nano
+RUN apt-get install -y nano
