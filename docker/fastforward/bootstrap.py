@@ -10,7 +10,7 @@ files_in_dir = os.listdir(script_dir)
 list_of_scripts = []
 # Ensure that we only show the python files.  (Those ending in .py)
 for file in files_in_dir:
-    if file[-3:] == ".py":
+    if file[-3:] == ".py" and file != "__init__.py":
         list_of_scripts.append(file)
 
 # Sort list alphabetically by filename.
@@ -26,8 +26,6 @@ if list_of_scripts:
         choice = int(input(f'Select 0-{qty_of_scripts - 1}: '))
         if 0 <= choice < qty_of_scripts:
             # A valid choice has been made.
-            print(list_of_scripts)
-            print(list_of_scripts[choice])
             os.system("/usr/bin/python3 {}".format(
                 os.path.join(script_dir,
                 list_of_scripts[choice].replace(' ', '\ '))
