@@ -1,0 +1,26 @@
+---
+version: 1
+
+dnac:
+  debug: False
+  username: admin
+  password: C1sco12345
+  base_url: https://100.64.0.101:443
+  verify: False
+
+initial_discovery:
+  discoveryType: Range
+  preferredMgmtIPMethod: UseLoopBack
+  ipAddressList: 100.124.0.1-100.124.1.1
+  ipFilterList: []
+  protocolOrder: ssh
+  globalCredentialIdList: []
+  timeout: 5
+  retry: 3
+  name: Initial Discovery
+
+credentials:
+  cli:
+    enablePassword: C1sco12345
+    username: netadmin
+    password: C1sco12345
