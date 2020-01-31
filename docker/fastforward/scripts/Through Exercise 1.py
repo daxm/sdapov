@@ -1,11 +1,13 @@
 """Testing the use of dnacentersdk Python package."""
+from __future__ import absolute_import
+
 from dnacentersdk import DNACenterAPI
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import logging
 from ruamel.yaml import YAML
 from pathlib import Path
-from .__subroutines import get_snmp_properties, get_cli_user_id
+from .__subroutines import get_cli_user_id, get_snmp_properties
 
 # Disable annoying HTTP warnings
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
