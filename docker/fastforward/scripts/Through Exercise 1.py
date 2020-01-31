@@ -1,5 +1,4 @@
 """Testing the use of dnacentersdk Python package."""
-from __future__ import absolute_import
 
 from dnacentersdk import DNACenterAPI
 import requests

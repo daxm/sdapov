@@ -26,6 +26,7 @@ if list_of_scripts:
         choice = int(input(f'Select 0-{qty_of_scripts - 1}: '))
         if 0 <= choice < qty_of_scripts:
             # A valid choice has been made.
+            os.chdir(script_dir)
             os.system("/usr/bin/python3 {}".format(
                 os.path.join(script_dir,
                 list_of_scripts[choice].replace(' ', '\ '))
