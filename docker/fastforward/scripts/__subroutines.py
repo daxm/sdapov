@@ -2,7 +2,7 @@
 
 
 def get_snmp_properties(api):
-    community_ids = {}
+    community_ids = []
 
     # RO communitites
     response = api.network_discovery.get_global_credentials(credential_sub_type="SNMPV2_READ_COMMUNITY")
