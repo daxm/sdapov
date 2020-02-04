@@ -39,11 +39,9 @@ def initial_discover(api, data_vars):
     Perform initial discovery to get cp-border-1, cp-border-2, and edge-1 into DNA Center.
     """
     # Gather IDs for credentials list
+    data_vars["initial_discovery"]["globalCredentialIdList"] = []
     data_vars["initial_discovery"]["global_CredentialIdList"].append(
         get_cli_user_id(api=api, credentials=data_vars["credentials"]["cli"]))
-
-    # Get SNMP RO/RW Info
-    data_vars["initial_discovery"]["globalCredentialIdList"] = []
     snmp_info = get_snmp_v2_communities(api=api)
     for item in snmp_info:
         data_vars["initial_discovery"]["globalCredentialIdList"].append(item["id"])
