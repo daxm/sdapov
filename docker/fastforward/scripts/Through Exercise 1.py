@@ -8,6 +8,7 @@ import logging
 from ruamel.yaml import YAML
 from pathlib import Path
 from __subroutines import get_cli_user_id, get_snmp_v2_communities, check_task_error_state, testing_stuff
+from time import sleep
 
 # Disable annoying HTTP warnings
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -30,7 +31,7 @@ def main(datafile):
 
     # Exercise 1 Steps:
     initial_discover(api=api, data_vars=my_data)
-    testing_stuff(api=api, data_vars=my_data)
+    # testing_stuff(api=api, data_vars=my_data)
 
 
 def initial_discover(api, data_vars):
@@ -59,9 +60,12 @@ def initial_discover(api, data_vars):
         name=discovery_info["name"],
         netconfPort=str(discovery_info["netconfPort"]),
     )
+    check_task_error_state(api=api, task_id=result["response"]["taskId"])
 
     # Wait for discovery to complete
-    check_task_error_state(api=api, task_id=result["response"]["taskId"])
+    while True:
+        print(api.devices.get_device_list())
+        sleep(5)
 
 
 if __name__ == "__main__":

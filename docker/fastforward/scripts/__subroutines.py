@@ -1,5 +1,5 @@
 """Subroutines related to Network Discovery API; to be used in main programs."""
-import time
+# from time import sleep
 from dnacentersdk import DNACenterAPI
 
 

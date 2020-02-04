@@ -19,6 +19,7 @@ initial_discovery:
   retry: 3
   name: Initial Discovery
   netconfPort: 830
+  number_of_discovered_devices: 3
 
 credentials:
   cli:
