@@ -8,13 +8,13 @@ def wait_for_task_to_complete(api, task_id=None):
         task_completed = False
         while not task_completed:
             result = api.task.get_task_by_id(task_id=task_id)
-            if result["isError"]:
+            if result["response"]["isError"]:
                 print(result)
                 return
-            elif result["progress"] == "In Progress":
-                print(result)
+            elif result["response"]["progress"] == "In Progress":
+                print(result["response"])
             else:
-                print(result["progress"])
+                print(result["response"]["progress"])
             time.sleep(1)
     return
 
