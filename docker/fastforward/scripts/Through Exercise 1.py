@@ -30,7 +30,7 @@ def main(datafile):
 
     # Exercise 1 Steps:
     initial_discover(api=api, data_vars=my_data)
-    testing_stuff(api, data_vars)
+    testing_stuff(api=api, data_vars=my_data)
 
 
 def initial_discover(api, data_vars):
