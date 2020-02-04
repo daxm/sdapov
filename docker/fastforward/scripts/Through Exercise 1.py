@@ -1,5 +1,5 @@
 
-"""Testing the use of dnacentersdk Python package."""
+"""Configure DNA Center up through Exercise 1."""
 
 from dnacentersdk import DNACenterAPI
 import requests
@@ -7,7 +7,7 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import logging
 from ruamel.yaml import YAML
 from pathlib import Path
-from __subroutines import get_cli_user_id, get_snmp_v2_communities, testing_stuff, wait_for_task_to_complete
+from __subroutines import get_cli_user_id, get_snmp_v2_communities, wait_for_task_to_complete
 
 # Disable annoying HTTP warnings
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -29,7 +29,6 @@ def main(datafile):
     api = DNACenterAPI(**my_data["dnac"])
 
     # testing_stuff(api, data_vars)
-
     # Exercise 1 Steps:
     initial_discover(api=api, data_vars=my_data)
 
@@ -62,7 +61,7 @@ def initial_discover(api, data_vars):
     )
 
     # Wait for discovery to complete
-    wait_for_task_to_complete(id=result["taskId'"])
+    wait_for_task_to_complete(task_id=result["taskId"])
 
 
 if __name__ == "__main__":

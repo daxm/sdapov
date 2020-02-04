@@ -3,11 +3,11 @@ import time
 from dnacentersdk import DNACenterAPI
 
 
-def wait_for_task_to_complete(id=None):
-    if id:
+def wait_for_task_to_complete(task_id=None):
+    if task_id:
         task_completed = False
         while not task_completed:
-            print(api.task.get_task_by_id(task_id=id))
+            print(api.task.get_task_by_id(task_id=task_id))
             time.sleep(1)
     return
 
