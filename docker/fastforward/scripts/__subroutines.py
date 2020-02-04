@@ -1,7 +1,7 @@
 """Subroutines related to Network Discovery API; to be used in main programs."""
 
 
-def get_snmp_properties(api):
+def get_snmp_v2_communities(api):
     community_ids = []
 
     # RO communitites
