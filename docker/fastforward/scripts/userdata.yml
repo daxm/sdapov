@@ -18,6 +18,7 @@ initial_discovery:
   timeout: 5
   retry: 3
   name: Initial Discovery
+  netconfPort: 830
 
 credentials:
   cli:

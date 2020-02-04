@@ -49,7 +49,7 @@ def initial_discover(api, data_vars):
     discovery_info = data_vars["initial_discovery"]
 
     # Start the Discovery
-    api.network_discovery.start_discovery(
+    result = api.network_discovery.start_discovery(
         discoveryType=discovery_info["discoveryType"],
         preferredMgmtIPMethod=discovery_info["preferredMgmtIPMethod"],
         ipAddressList=discovery_info["ipAddressList"],
@@ -58,7 +58,11 @@ def initial_discover(api, data_vars):
         timeout=discovery_info["timeout"],
         retry=discovery_info["retry"],
         name=discovery_info["name"],
+        netconfPort=discovery_info["netconfPort"],
     )
+
+    # Wait for discovery to complete
+    print(result)
 
 
 if __name__ == "__main__":
