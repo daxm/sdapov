@@ -43,9 +43,10 @@ def initial_discover(api, data_vars):
         get_cli_user_id(api=api, credentials=data_vars["credentials"]["cli"]))
 
     # Get SNMP RO/RW Info
+    data_vars["initial_discovery"]["globalCredentialIdList"] = []
     snmp_info = get_snmp_v2_communities(api=api)
     for item in snmp_info:
-        data_vars["initial_discovery"]["global_CredentialIdList"].append(item["id"])
+        data_vars["initial_discovery"]["globalCredentialIdList"].append(item["id"])
 
     discovery_info = data_vars["initial_discovery"]
 
@@ -55,7 +56,7 @@ def initial_discover(api, data_vars):
         preferredMgmtIPMethod=discovery_info["preferredMgmtIPMethod"],
         ipAddressList=discovery_info["ipAddressList"],
         protocolOrder=discovery_info["protocolOrder"],
-        globalCredentialIdList=discovery_info["global_CredentialIdList"],
+        globalCredentialIdList=discovery_info["globalCredentialIdList"],
         timeout=discovery_info["timeout"],
         retry=discovery_info["retry"],
         name=discovery_info["name"],
