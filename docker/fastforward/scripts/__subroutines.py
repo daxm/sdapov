@@ -32,6 +32,7 @@ def get_snmp_v2_communities(api):
 
 def get_cli_user_id(api, credentials):
     result = api.network_discovery.get_global_credentials(credential_sub_type="CLI")
+    print(result)
     check_task_error_state(api=api, task_id=result["response"]["taskId"])
     for item in result["response"]:
         if item["username"] == credentials["username"]:
