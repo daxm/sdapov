@@ -19,7 +19,10 @@ initial_discovery:
   retry: 3
   name: Initial Discovery
   netconfPort: 830
-  number_of_discovered_devices: 3
+  device_names:
+    - cp-border-1
+    - cp-border-2
+    - edge-1
 
 credentials:
   cli:

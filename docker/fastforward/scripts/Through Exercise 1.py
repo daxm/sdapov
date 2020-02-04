@@ -63,8 +63,14 @@ def initial_discover(api, data_vars):
     check_task_error_state(api=api, task_id=result["response"]["taskId"])
 
     # Wait for discovery to complete
-    while True:
-        print(api.devices.get_device_list())
+    devices_discovered = []
+    while len(devices_discovered) < len(discovery_info["device_names"]):
+        result = api.devices.get_device_list()
+        for device in result["response"]:
+            if device["hostname"] in discovery_info["device_names"]:
+                print(f"{device['hostname']} has been added to inventory.")
+                discovery_info["device_names"].remove(device["hostname"])
+                devices_discovered.append(device["hostname"])
         sleep(5)
 
 
