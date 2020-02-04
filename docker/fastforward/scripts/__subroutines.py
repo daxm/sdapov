@@ -48,9 +48,8 @@ def get_cli_user_id(api, credentials):
 
 def testing_stuff(api, data_vars):
     """Playground to mess with testing API calls."""
-    while True:
-        # Get tasks
-        print(api.task.get_tasks())
+    # Get tasks
+    print(api.task.get_tasks())
     pass
 
 
