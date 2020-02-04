@@ -1,4 +1,15 @@
 """Subroutines related to Network Discovery API; to be used in main programs."""
+import time
+from dnacentersdk import DNACenterAPI
+
+
+def wait_for_task_to_complete(id=None):
+    if id:
+        task_completed = False
+        while not task_completed:
+            print(api.task.get_task_by_id(task_id=id))
+            time.sleep(1)
+    return
 
 
 def get_snmp_v2_communities(api):
@@ -27,3 +38,8 @@ def get_cli_user_id(api, credentials):
 def testing_stuff(api, data_vars):
     """Playground to mess with testing API calls."""
     pass
+
+
+if __name__ == "__main__":
+    # This won't work but will allow command completion.
+    api = DNACenterAPI

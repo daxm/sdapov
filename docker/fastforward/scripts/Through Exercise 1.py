@@ -7,7 +7,7 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import logging
 from ruamel.yaml import YAML
 from pathlib import Path
-from __subroutines import get_cli_user_id, get_snmp_v2_communities, testing_stuff
+from __subroutines import get_cli_user_id, get_snmp_v2_communities, testing_stuff, wait_for_task_to_complete
 
 # Disable annoying HTTP warnings
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -58,11 +58,11 @@ def initial_discover(api, data_vars):
         timeout=discovery_info["timeout"],
         retry=discovery_info["retry"],
         name=discovery_info["name"],
-        netconfPort=discovery_info["netconfPort"],
+        netconfPort=str(discovery_info["netconfPort"]),
     )
 
     # Wait for discovery to complete
-    print(result)
+    wait_for_task_to_complete(id=result["taskId'"])
 
 
 if __name__ == "__main__":
