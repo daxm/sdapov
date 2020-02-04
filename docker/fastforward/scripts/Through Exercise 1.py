@@ -64,7 +64,7 @@ def initial_discover(api, data_vars):
 
     # Wait for discovery to complete
     devices_discovered = []
-    while len(devices_discovered) < len(discovery_info["device_names"]):
+    while len(devices_discovered) <= len(discovery_info["device_names"]):
         result = api.devices.get_device_list()
         for device in result["response"]:
             print(f"List of devices to find: {discovery_info['device_names']}\nDevices found: {devices_discovered}")
