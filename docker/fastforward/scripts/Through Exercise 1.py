@@ -39,8 +39,7 @@ def initial_discover(api, data_vars):
     """
     # Gather IDs for credentials list
     data_vars["credentials"]["cli"]["id"] = get_cli_user_id(
-        api=api,
-        credentials=data_vars["credentials"]["cli"]
+        api=api, credentials=data_vars["credentials"]["cli"]
     )
 
     snmp_info = get_snmp_properties(api=api)

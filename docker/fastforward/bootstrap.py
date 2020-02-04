@@ -20,16 +20,16 @@ if list_of_scripts:
     print("")
     print("Select which Python script to run:")
     for counter, file in enumerate(list_of_scripts):
-        print(f'\t{counter}: {file}')
+        print(f"\t{counter}: {file}")
     qty_of_scripts = len(list_of_scripts)
     try:
-        choice = int(input(f'Select 0-{qty_of_scripts - 1}: '))
+        choice = int(input(f"Select 0-{qty_of_scripts - 1}: "))
         if 0 <= choice < qty_of_scripts:
             # A valid choice has been made.
             os.chdir(script_dir)
-            os.system("/usr/bin/python3 {}".format(
-                os.path.join(script_dir,
-                list_of_scripts[choice].replace(' ', '\ '))
+            os.system(
+                "/usr/bin/python3 {}".format(
+                    os.path.join(script_dir, list_of_scripts[choice].replace(" ", "\ "))
                 )
             )
         else:
