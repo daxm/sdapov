@@ -60,6 +60,7 @@ def initial_discover(api, data_vars):
         netconfPort=str(discovery_info["netconfPort"]),
     )
 
+    print(result)
     # Wait for discovery to complete
     wait_for_task_to_complete(task_id=result["taskId"])
 
