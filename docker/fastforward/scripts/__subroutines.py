@@ -3,23 +3,13 @@ import time
 from dnacentersdk import DNACenterAPI
 
 
-def wait_for_task_to_complete(api, task_id=None):
+def check_task_error_state(api, task_id=None):
     if task_id:
-        task_completed = False
         result = api.task.get_task_by_id(task_id=task_id)
-        """
-        while not task_completed:
-            result = api.task.get_task_by_id(task_id=task_id)
-            if result["response"]["isError"]:
-                print(result)
-                return
-            elif result["response"]["progress"] == "In Progress":
-                print(result["response"])
-            else:
-                print(result["response"]["progress"])
-        """
-        print(result["response"])
-        time.sleep(1)
+        if result["response"]["isError"]:
+            print(f"An error has occurred with this task: {result}")
+        else:
+            print(f"Submitted task shows no errors.")
     return
 
 
@@ -27,20 +17,23 @@ def get_snmp_v2_communities(api):
     community_ids = []
 
     # RO communitites
-    response = api.network_discovery.get_global_credentials(credential_sub_type="SNMPV2_READ_COMMUNITY")
-    for item in response["response"]:
+    result = api.network_discovery.get_global_credentials(credential_sub_type="SNMPV2_READ_COMMUNITY")
+    check_task_error_state(api=api, task_id=result["response"]["taskId"])
+    for item in result["response"]:
         community_ids.append(item)
 
     # RW communitites
-    response = api.network_discovery.get_global_credentials(credential_sub_type="SNMPV2_WRITE_COMMUNITY")
-    for item in response["response"]:
+    result = api.network_discovery.get_global_credentials(credential_sub_type="SNMPV2_WRITE_COMMUNITY")
+    check_task_error_state(api=api, task_id=result["response"]["taskId"])
+    for item in result["response"]:
         community_ids.append(item)
     return community_ids
 
 
 def get_cli_user_id(api, credentials):
-    response = api.network_discovery.get_global_credentials(credential_sub_type="CLI")
-    for item in response["response"]:
+    result = api.network_discovery.get_global_credentials(credential_sub_type="CLI")
+    check_task_error_state(api=api, task_id=result["response"]["taskId"])
+    for item in result["response"]:
         if item["username"] == credentials["username"]:
             return item["id"]
     return 0
