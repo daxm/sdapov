@@ -64,13 +64,13 @@ def initial_discover(api, data_vars):
 
     # Wait for discovery to complete
     devices_discovered = []
-    while len(devices_discovered) <= len(discovery_info["device_names"]):
+    number_of_devices_to_find = len(discovery_info["device_names"])
+    while len(devices_discovered) <= number_of_devices_to_find:
         result = api.devices.get_device_list()
         for device in result["response"]:
             print(f"List of devices to find: {discovery_info['device_names']}\nDevices found: {devices_discovered}")
             if device["hostname"] in discovery_info["device_names"]:
                 print(f"{device['hostname']} has been added to inventory.")
-                discovery_info["device_names"].remove(device["hostname"])
                 devices_discovered.append(device["hostname"])
         sleep(5)
 
