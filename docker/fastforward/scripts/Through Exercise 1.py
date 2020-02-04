@@ -61,7 +61,7 @@ def initial_discover(api, data_vars):
     )
 
     # Wait for discovery to complete
-    wait_for_task_to_complete(task_id=result["response"]["taskId"])
+    wait_for_task_to_complete(api=api, task_id=result["response"]["taskId"])
 
 
 if __name__ == "__main__":
