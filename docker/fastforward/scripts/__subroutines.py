@@ -13,3 +13,8 @@ def get_cli_user_id(api, credentials):
         if item["username"] == credentials["username"]:
             return item["id"]
     return 0
+
+
+def testing_stuff(api, data_vars):
+    """Playground to mess with testing API calls."""
+    pass
