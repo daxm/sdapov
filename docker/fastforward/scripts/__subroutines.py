@@ -18,13 +18,11 @@ def get_snmp_v2_communities(api):
 
     # RO communitites
     result = api.network_discovery.get_global_credentials(credential_sub_type="SNMPV2_READ_COMMUNITY")
-    check_task_error_state(api=api, task_id=result["response"]["taskId"])
     for item in result["response"]:
         community_ids.append(item)
 
     # RW communitites
     result = api.network_discovery.get_global_credentials(credential_sub_type="SNMPV2_WRITE_COMMUNITY")
-    check_task_error_state(api=api, task_id=result["response"]["taskId"])
     for item in result["response"]:
         community_ids.append(item)
     return community_ids
@@ -32,8 +30,6 @@ def get_snmp_v2_communities(api):
 
 def get_cli_user_id(api, credentials):
     result = api.network_discovery.get_global_credentials(credential_sub_type="CLI")
-    print(result)
-    check_task_error_state(api=api, task_id=result["response"]["taskId"])
     for item in result["response"]:
         if item["username"] == credentials["username"]:
             return item["id"]
