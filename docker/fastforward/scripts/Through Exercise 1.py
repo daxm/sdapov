@@ -28,9 +28,9 @@ def main(datafile):
     # Establish connection to DNA Center
     api = DNACenterAPI(**my_data["dnac"])
 
-    # testing_stuff(api, data_vars)
     # Exercise 1 Steps:
     initial_discover(api=api, data_vars=my_data)
+    testing_stuff(api, data_vars)
 
 
 def initial_discover(api, data_vars):

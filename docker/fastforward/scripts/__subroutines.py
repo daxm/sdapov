@@ -6,9 +6,10 @@ from dnacentersdk import DNACenterAPI
 def wait_for_task_to_complete(api, task_id=None):
     if task_id:
         task_completed = False
+        result = api.task.get_task_by_id(task_id=task_id)
+        """
         while not task_completed:
             result = api.task.get_task_by_id(task_id=task_id)
-            """
             if result["response"]["isError"]:
                 print(result)
                 return
@@ -16,9 +17,9 @@ def wait_for_task_to_complete(api, task_id=None):
                 print(result["response"])
             else:
                 print(result["response"]["progress"])
-            """
-            print(result["response"])
-            time.sleep(1)
+        """
+        print(result["response"])
+        time.sleep(1)
     return
 
 
@@ -47,6 +48,9 @@ def get_cli_user_id(api, credentials):
 
 def testing_stuff(api, data_vars):
     """Playground to mess with testing API calls."""
+    while True:
+        # Get tasks
+        print(api.task.get_tasks())
     pass
 
 
