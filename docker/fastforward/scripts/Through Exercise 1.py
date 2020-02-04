@@ -7,7 +7,7 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import logging
 from ruamel.yaml import YAML
 from pathlib import Path
-from __subroutines import get_cli_user_id, get_snmp_v2_communities, wait_for_task_to_complete
+from __subroutines import get_cli_user_id, get_snmp_v2_communities, wait_for_task_to_complete, testing_stuff
 
 # Disable annoying HTTP warnings
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
