@@ -69,7 +69,7 @@ def initial_discover(api, data_vars):
         result = api.devices.get_device_list()
         for device in result["response"]:
             print(f"List of devices to find: {discovery_info['device_names']}\nDevices found: {devices_discovered}")
-            if device["hostname"] in discovery_info["device_names"]:
+            if device["hostname"] in discovery_info["device_names"] and device["hostname"] not in devices_discovered:
                 print(f"{device['hostname']} has been added to inventory.")
                 devices_discovered.append(device["hostname"])
         sleep(5)
