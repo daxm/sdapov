@@ -20,9 +20,9 @@ initial_discovery:
   name: Initial Discovery
   netconfPort: 830
   device_names:
-    - cp-border-1
-    - cp-border-2
-    - edge-1
+    - cp-border-1.selfserve.lab
+    - cp-border-2.selfserve.lab
+    - edge-1.selfserve.lab
 
 credentials:
   cli:

@@ -67,6 +67,7 @@ def initial_discover(api, data_vars):
     while len(devices_discovered) < len(discovery_info["device_names"]):
         result = api.devices.get_device_list()
         for device in result["response"]:
+            print(result["response"])
             if device["hostname"] in discovery_info["device_names"]:
                 print(f"{device['hostname']} has been added to inventory.")
                 discovery_info["device_names"].remove(device["hostname"])
