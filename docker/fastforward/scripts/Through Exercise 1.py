@@ -40,7 +40,7 @@ def initial_discover(api, data_vars):
     """
     # Gather IDs for credentials list
     data_vars["initial_discovery"]["globalCredentialIdList"] = []
-    data_vars["initial_discovery"]["global_CredentialIdList"].append(
+    data_vars["initial_discovery"]["globalCredentialIdList"].append(
         get_cli_user_id(api=api, credentials=data_vars["credentials"]["cli"]))
     snmp_info = get_snmp_v2_communities(api=api)
     for item in snmp_info:
