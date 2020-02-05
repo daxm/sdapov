@@ -3,12 +3,32 @@ from dnacentersdk import DNACenterAPI
 from time import sleep, perf_counter
 
 
-def initial_discovery(api_connection, data_vars):
-    """
-    Perform initial discovery to get cp-border-1, cp-border-2, and edge-1 into DNA Center.
-    """
-    discovery_wait_timeout = 300
+def testing_stuff(api_connection, data_vars):
+    """Playground to mess with testing API calls."""
+    print(f"DATA_VARS = {data_vars}")
+    # Get tasks
+    asdf = api_connection.sites.get_site()
+    print(asdf)
 
+
+def set_device_role(api_connection, data_vars, devices=[]):
+    """Configure the list of devices to their chosen device role."""
+    pass
+
+
+def provision_devices(api_connection, data_vars, devices=[]):
+    """Provision the list of devices and assign to their hierarchy location."""
+    pass
+
+
+def get_site(api_connection, data_vars, sites=[]):
+    """Get site info for listed sites."""
+    pass
+
+
+def initial_discovery(api_connection, data_vars):
+    """Perform initial discovery to get cp-border-1, cp-border-2, and edge-1 into DNA Center."""
+    discovery_wait_timeout = 300
     print("Exercise 1: Add Devices to DNA Center")
 
     # Gather IDs for credentials list
@@ -46,19 +66,20 @@ def initial_discovery(api_connection, data_vars):
         result = api_connection.devices.get_device_list()
         for device in result["response"]:
             if device["hostname"] in discovery_info["device_names"] and device["hostname"] not in devices_discovered:
-                print(f"\t\t{device['hostname']} has been added to inventory.")
+                print(f"\t{device['hostname']} has been added to inventory.")
                 devices_discovered.append(device["hostname"])
         if (perf_counter() - starttime) > discovery_wait_timeout:
-            print("\t\tMax wait time met.  Quiting waiting for devices to finish being discovered.")
+            print("\tMax wait time met.  Quiting waiting for devices to finish being discovered.")
             are_we_there_yet = True
         elif len(devices_discovered) >= len(discovery_info["device_names"]):
-            print("\t\tAll devices discovered.")
+            print("\tAll devices discovered.")
             are_we_there_yet = True
         else:
             sleep(5)
 
 
 def check_task_error_state(api_connection, task_id=None):
+    """Check whether given task_id has errored."""
     if task_id:
         result = api_connection.task.get_task_by_id(task_id=task_id)
         if result["response"]["isError"]:
@@ -69,6 +90,7 @@ def check_task_error_state(api_connection, task_id=None):
 
 
 def get_snmp_v2_communities(api_connection):
+    """Collect SNMP v2 info."""
     community_ids = []
 
     # RO communitites
@@ -84,19 +106,12 @@ def get_snmp_v2_communities(api_connection):
 
 
 def get_cli_user_id(api_connection, credentials):
+    """Collect ID first user with CLI as sub-type."""
     result = api_connection.network_discovery.get_global_credentials(credential_sub_type="CLI")
     for item in result["response"]:
         if item["username"] == credentials["username"]:
             return item["id"]
     return 0
-
-
-def testing_stuff(api_connection, data_vars):
-    """Playground to mess with testing API calls."""
-    print(data_vars)
-    # Get tasks
-    print(api_connection.task.get_tasks())
-    pass
 
 
 if __name__ == "__main__":
