@@ -4,7 +4,7 @@
 def get_snmp_properties(api):
     response = api.network_discovery.get_snmp_properties()
     print(response)
-    return 0
+    return response
 
 
 def get_cli_user_id(api, credentials):
