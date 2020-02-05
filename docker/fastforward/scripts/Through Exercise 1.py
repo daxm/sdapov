@@ -7,14 +7,10 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import logging
 from ruamel.yaml import YAML
 from pathlib import Path
-from __subroutines import get_cli_user_id, get_snmp_v2_communities, check_task_error_state, testing_stuff
-from time import sleep, perf_counter
+from __subroutines import initial_discovery
 
 # Disable annoying HTTP warnings
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-
-# Globals
-MAX_WAIT_SEC = 300
 
 
 def main(datafile):
@@ -37,62 +33,8 @@ def main(datafile):
     api = DNACenterAPI(**my_data["dnac"])
 
     # Exercise 1 Steps:
-    initial_discovery(api=api, data_vars=my_data)
+    initial_discovery(api_connection=api, data_vars=my_data)
     # testing_stuff(api=api, data_vars=my_data)
-
-
-def initial_discovery(api, data_vars):
-    """
-    Perform initial discovery to get cp-border-1, cp-border-2, and edge-1 into DNA Center.
-    """
-    print("Exercise 1: Add Devices to DNA Center")
-
-    # Gather IDs for credentials list
-    data_vars["initial_discovery"]["globalCredentialIdList"] = []
-    print("\tCollecting info for CLI credentials.")
-    data_vars["initial_discovery"]["globalCredentialIdList"].append(
-        get_cli_user_id(api=api, credentials=data_vars["credentials"]["cli"]))
-    print("\tCollecting info for SNMP RO/RW.")
-    snmp_info = get_snmp_v2_communities(api=api)
-    for item in snmp_info:
-        data_vars["initial_discovery"]["globalCredentialIdList"].append(item["id"])
-
-    discovery_info = data_vars["initial_discovery"]
-
-    # Start the Discovery
-    print("\tBuild and start 'Initial Discovery'.")
-    result = api.network_discovery.start_discovery(
-        discoveryType=discovery_info["discoveryType"],
-        preferredMgmtIPMethod=discovery_info["preferredMgmtIPMethod"],
-        ipAddressList=discovery_info["ipAddressList"],
-        protocolOrder=discovery_info["protocolOrder"],
-        globalCredentialIdList=discovery_info["globalCredentialIdList"],
-        timeout=discovery_info["timeout"],
-        retry=discovery_info["retry"],
-        name=discovery_info["name"],
-        netconfPort=str(discovery_info["netconfPort"]),
-    )
-    check_task_error_state(api=api, task_id=result["response"]["taskId"])
-
-    # Wait for discovery to complete
-    print("\tWait for 'Initial Discovery' to finish.")
-    devices_discovered = []
-    starttime = perf_counter()
-    are_we_there_yet = False
-    while not are_we_there_yet:
-        result = api.devices.get_device_list()
-        for device in result["response"]:
-            if device["hostname"] in discovery_info["device_names"] and device["hostname"] not in devices_discovered:
-                print(f"\t\t{device['hostname']} has been added to inventory.")
-                devices_discovered.append(device["hostname"])
-        if (perf_counter() - starttime) > MAX_WAIT_SEC:
-            print("\t\tMax wait time met.  Quiting waiting for devices to finish being discovered.")
-            are_we_there_yet = True
-        elif len(devices_discovered) >= len(discovery_info["device_names"]):
-            print("\t\tAll devices discovered.")
-            are_we_there_yet = True
-        else:
-            sleep(5)
 
 
 if __name__ == "__main__":
