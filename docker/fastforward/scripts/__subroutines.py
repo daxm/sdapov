@@ -7,7 +7,7 @@ def testing_stuff(api_connection, data_vars):
     """Playground to mess with testing API calls."""
     print(f"DATA_VARS = {data_vars}")
     # Get tasks
-    asdf = api_connection.sites.get_site()
+    asdf = api_connection.sites.get_site(name='SJC-13-2')
     print(asdf)
 
 

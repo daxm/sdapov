@@ -11,9 +11,6 @@ import locale
 # Disable annoying HTTP warnings
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-# Hard code the locale()
-locale.setlocale(locale.LC_ALL, '')
-
 
 def main(datafile):
     """Run the program."""
