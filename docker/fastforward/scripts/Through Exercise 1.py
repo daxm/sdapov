@@ -9,9 +9,13 @@ from ruamel.yaml import YAML
 from pathlib import Path
 from __subroutines import get_cli_user_id, get_snmp_v2_communities, check_task_error_state, testing_stuff
 from time import sleep
+from time import perf_counter
 
 # Disable annoying HTTP warnings
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
+# Globals
+MAX_WAIT_SEC = 300
 
 
 def main(datafile):
@@ -65,13 +69,18 @@ def initial_discover(api, data_vars):
     # Wait for discovery to complete
     devices_discovered = []
     number_of_devices_to_find = len(discovery_info["device_names"])
-    while len(devices_discovered) <= number_of_devices_to_find:
+    starttime = perf_counter()
+    time_delta = 0
+    while len(devices_discovered) <= number_of_devices_to_find and MAX_WAIT_SEC > time_delta:
         result = api.devices.get_device_list()
         for device in result["response"]:
             if device["hostname"] in discovery_info["device_names"] and device["hostname"] not in devices_discovered:
                 print(f"{device['hostname']} has been added to inventory.")
                 devices_discovered.append(device["hostname"])
         sleep(5)
+        time_delta = perf_counter() - starttime
+        if time_delta > MAX_WAIT_SEC:
+            print("Max wait time met.  Quiting waiting for devices to finish being discovered.")
 
 
 if __name__ == "__main__":
