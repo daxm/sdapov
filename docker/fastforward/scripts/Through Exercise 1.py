@@ -37,6 +37,8 @@ def main(datafile):
     # Exercise 1 Steps:
     initial_discovery(api_connection=api, data_vars=my_data)
 
+    print("Automation script has completed, exiting.")
+
 
 if __name__ == "__main__":
     main(datafile="userdata.yml")

@@ -44,6 +44,8 @@ def main(datafile):
 
     testing_stuff(api_connection=api, data_vars=my_data)
 
+    print("Automation script has completed, exiting.")
+
 
 if __name__ == "__main__":
     main(datafile="userdata.yml")
