@@ -20,8 +20,7 @@ def set_device_role(api_connection, data_vars, devices=[]):
         for yaml_device in data_vars:
             if yaml_device["name"] == device:
                 device_info = api_connection.devices.get_device_detail(
-                    search_by=device,
-                    identifier="nwDeviceName")
+                    search_by=device,)
                 print(device_info)
                 #api_connection.devices.update_device_role(id=device_info["response"]["id"], role=yaml_device["role"]')
 
