@@ -6,6 +6,6 @@ docker stop %DOCKER_CONTAINER_NAME%
 
 @echo on
 docker pull %DOCKER_IMAGE%
-docker run --rm -it --name %DOCKER_CONTAINER_NAME% %DOCKER_IMAGE%
+docker run -it --rm --name %DOCKER_CONTAINER_NAME% %DOCKER_IMAGE%
 
 pause
