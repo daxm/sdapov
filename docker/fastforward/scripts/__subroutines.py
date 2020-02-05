@@ -9,8 +9,8 @@ def testing_stuff(api_connection, data_vars):
     if data_vars:
         print("passed data_vars.  Meh.")
 
-    asdf = api_connection.sites.get_site(name='SJ-13-2')
-    print(asdf)
+    #asdf = api_connection.sites.get_site(name='SJ-13-2')
+    #print(asdf)
 
 
 def set_device_role(api_connection, data_vars, devices=[]):
@@ -25,7 +25,7 @@ def provision_devices(api_connection, data_vars, devices=[]):
         # Get info from userdata.yml file regarding this particular device.
         for yaml_device in data_vars:
             if yaml_device["name"] == device:
-                site = api_connection.sites.get_site(name=yaml_device["location_name"])
+                site = api_connection.sites.get_site(name=yaml_device["location_name"])["response"][0]["id"]
                 print(f"Location ID: {site}")
                 pass
 
