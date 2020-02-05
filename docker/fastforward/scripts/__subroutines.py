@@ -25,7 +25,7 @@ def assign_devices_to_sites(api_connection, data_vars, devices=[]):
             if yaml_device["name"] == device:
                 # Get ID of hierarchy location for this device.
                 print(f"Assigning {device} to site {yaml_device['location_name']}")
-                print(api_connection.sites.get_site(name=yaml_device["location_name"]))
+                print(api_connection.sites.get_site(name=yaml_device["location_name"])["response"][0]["id"])
                 api_connection.sites.assign_device_to_site(
                     device=the_device,
                     site_id='')
