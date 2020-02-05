@@ -7,9 +7,9 @@ def testing_stuff(api_connection, data_vars):
     """Playground to mess with testing API calls."""
     if not data_vars:
         print(f"data_vars: {data_vars}")
-    # Get tasks
-    asdf = api_connection.sites.get_site(name='Global/Bay Area/San_Jose-13/SJ-13-2')
-    print(asdf)
+
+    #asdf = api_connection.sites.get_site(name='Global/Bay Area/San_Jose-13/SJ-13-2')
+    #print(asdf)
 
 
 def set_device_role(api_connection, data_vars, devices=[]):
@@ -19,6 +19,8 @@ def set_device_role(api_connection, data_vars, devices=[]):
 
 def provision_devices(api_connection, data_vars, devices=[]):
     """Provision the list of devices and assign to their hierarchy location."""
+    for device in devices:
+        print(data_vars)
     pass
 
 

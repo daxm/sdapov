@@ -33,13 +33,13 @@ credentials:
 devices:
   - name: cp-border-1.selfserve.lab
     role: BORDER ROUTER
-    location_name: SJ-13-2
+    location_name: Global/Bay Area/San_Jose-13/SJ-13-2
   - name: cp-border-2.selfserve.lab
     role: BORDER ROUTER
-    location_name: SF-1-2
+    location_name: Global/Bay Area/San_Francisco-1/SF-1-2
   - name: edge-1.selfserve.lab
     role: ACCESS
-    location_name: SJ-13-1
+    location_name: Global/Bay Area/San_Jose-13/SJ-13-1
 
 hierarchy:
     - name: Bay Area
