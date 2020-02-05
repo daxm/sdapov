@@ -33,7 +33,7 @@ def assign_devices_to_sites(api_connection, data_vars, devices=[]):
 
 def get_device_by_name(api_connection, name=None):
     """Get device info and return response"""
-    devices = api_connection.devices.get_device_list()
+    devices = api_connection.devices.get_device_list()["response"]
     print(devices)
     for device in devices:
         #print(device)
