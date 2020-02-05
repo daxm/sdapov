@@ -6,9 +6,13 @@ import logging
 from ruamel.yaml import YAML
 from pathlib import Path
 from __subroutines import initial_discovery, provision_devices, set_device_role, testing_stuff
+import locale
 
 # Disable annoying HTTP warnings
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
+# Hard code the locale()
+locale.setlocale(locale.LC_ALL, '')
 
 
 def main(datafile):
