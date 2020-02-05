@@ -8,8 +8,7 @@ import logging
 from ruamel.yaml import YAML
 from pathlib import Path
 from __subroutines import get_cli_user_id, get_snmp_v2_communities, check_task_error_state, testing_stuff
-from time import sleep
-from time import perf_counter
+from time import sleep, perf_counter
 
 # Disable annoying HTTP warnings
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -20,6 +19,10 @@ MAX_WAIT_SEC = 300
 
 def main(datafile):
     """Grab the data from the yaml file."""
+    print("\n\n\n")
+    print("="*15)
+    print("Starting program")
+    print("="*15)
     yaml = YAML(typ="safe")
     path = Path(datafile)
     with open(path, "r") as stream:
