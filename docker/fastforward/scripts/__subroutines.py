@@ -3,10 +3,17 @@ from dnacentersdk import DNACenterAPI
 from time import sleep, perf_counter
 
 
+def set_device_role(api_connection, data_vars, devices=[]):
+    """Configure the list of devices to their chosen device role."""
+
+
+def provision_devices(api_connection, data_vars, devices=[]):
+    """Provision the list of devices and assign to their heirarchy location."""
+    pass
+
+
 def initial_discovery(api_connection, data_vars):
-    """
-    Perform initial discovery to get cp-border-1, cp-border-2, and edge-1 into DNA Center.
-    """
+    """Perform initial discovery to get cp-border-1, cp-border-2, and edge-1 into DNA Center."""
     discovery_wait_timeout = 300
 
     print("Exercise 1: Add Devices to DNA Center")
@@ -59,6 +66,7 @@ def initial_discovery(api_connection, data_vars):
 
 
 def check_task_error_state(api_connection, task_id=None):
+    """Check whether given task_id has errored."""
     if task_id:
         result = api_connection.task.get_task_by_id(task_id=task_id)
         if result["response"]["isError"]:
@@ -69,6 +77,7 @@ def check_task_error_state(api_connection, task_id=None):
 
 
 def get_snmp_v2_communities(api_connection):
+    """Collect SNMP v2 info."""
     community_ids = []
 
     # RO communitites
@@ -84,6 +93,7 @@ def get_snmp_v2_communities(api_connection):
 
 
 def get_cli_user_id(api_connection, credentials):
+    """Collect ID first user with CLI as sub-type."""
     result = api_connection.network_discovery.get_global_credentials(credential_sub_type="CLI")
     for item in result["response"]:
         if item["username"] == credentials["username"]:

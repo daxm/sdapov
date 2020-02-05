@@ -29,3 +29,14 @@ credentials:
     enablePassword: C1sco12345
     username: netadmin
     password: C1sco12345
+
+devices:
+  - name: cp-border-1.selfserve.lab
+    role: BORDER ROUTER
+    location_name: SJ-13-2
+  - name: cp-border-2.selfserve.lab
+    role: BORDER ROUTER
+    location_name: SF-1-2
+  - name: edge-1.selfserve.lab
+    role: ACCESS
+    location_name: SJ-13-1
