@@ -77,9 +77,8 @@ def initial_discovery(api, data_vars):
     # Wait for discovery to complete
     print("\tWait for 'Initial Discovery' to finish.")
     devices_discovered = []
-    number_of_devices_to_find = len(discovery_info["device_names"])
     starttime = perf_counter()
-    while len(devices_discovered) <= number_of_devices_to_find:
+    while len(devices_discovered) < len(discovery_info["device_names"]):
         result = api.devices.get_device_list()
         for device in result["response"]:
             if device["hostname"] in discovery_info["device_names"] and device["hostname"] not in devices_discovered:
