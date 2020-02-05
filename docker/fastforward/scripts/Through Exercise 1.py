@@ -1,6 +1,4 @@
-
 """Configure DNA Center up through Exercise 1."""
-
 from dnacentersdk import DNACenterAPI
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning

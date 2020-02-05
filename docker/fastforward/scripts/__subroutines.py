@@ -21,7 +21,7 @@ def provision_devices(api_connection, data_vars, devices=[]):
     pass
 
 
-def get_site(api_connection, data_vars, sites=[])
+def get_site(api_connection, data_vars, sites=[]):
     """Get site info for listed sites."""
     pass
 
