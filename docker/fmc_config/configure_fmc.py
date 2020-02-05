@@ -10,7 +10,9 @@ def main():
     The FTD device already has 100.127.100.15 on its management interface and the command 'configure network manager
     100.64.0.155 cisco123' has already been manually typed on the FTD's CLI.
     """
-    with fmcapi.FMC(host='100.64.0.166', username='apiadmin', password='C1sco12345', autodeploy=True) as fmc1:
+    with fmcapi.FMC(
+        host="100.64.0.166", username="apiadmin", password="C1sco12345", autodeploy=True
+    ) as fmc1:
         """
         # Create Security Zones
         sz1 = fmcapi.SecurityZones(fmc=fmc1)
@@ -101,33 +103,33 @@ def main():
 
         # Add FTD device to FMC
         ftd1 = fmcapi.DeviceRecords(fmc=fmc1)
-        ftd1.hostName = '100.127.100.15'
-        ftd1.regKey = 'C1sco12345'
-        ftd1.acp(name='Restricted-VN-Initial-Policy')
-        ftd1.name = 'FTD'
-        ftd1.licensing(action='add', name='MALWARE')
-        ftd1.licensing(action='add', name='VPN')
-        ftd1.licensing(action='add', name='BASE')
-        ftd1.licensing(action='add', name='THREAT')
-        ftd1.licensing(action='add', name='URL')
+        ftd1.hostName = "100.127.100.15"
+        ftd1.regKey = "C1sco12345"
+        ftd1.acp(name="Restricted-VN-Initial-Policy")
+        ftd1.name = "FTD"
+        ftd1.licensing(action="add", name="MALWARE")
+        ftd1.licensing(action="add", name="VPN")
+        ftd1.licensing(action="add", name="BASE")
+        ftd1.licensing(action="add", name="THREAT")
+        ftd1.licensing(action="add", name="URL")
         # Push to FMC to start device registration.
         ftd1.post(post_wait_time=300)
 
         # Once registration is complete configure the interfaces of ftd.
         int101 = fmcapi.PhysicalInterfaces(fmc=fmc1, device_name=ftd1.name)
-        int101.get(name='GigabitEthernet0/0')
+        int101.get(name="GigabitEthernet0/0")
         int101.enabled = True
-        int101.ifname = 'FTD-to-Fusion'
-        int101.sz(name='Outside')
-        int101.static(ipv4addr='100.127.101.254', ipv4mask=24)
+        int101.ifname = "FTD-to-Fusion"
+        int101.sz(name="Outside")
+        int101.static(ipv4addr="100.127.101.254", ipv4mask=24)
         int101.put()
 
         int3004 = fmcapi.PhysicalInterfaces(fmc=fmc1, device_name=ftd1.name)
-        int3004.get(name='GigabitEthernet0/1')
+        int3004.get(name="GigabitEthernet0/1")
         int3004.enabled = True
-        int3004.ifname = 'FTD-to-Border1'
-        int3004.sz(name='Restricted')
-        int3004.static(ipv4addr='100.126.1.14', ipv4mask=30)
+        int3004.ifname = "FTD-to-Border1"
+        int3004.sz(name="Restricted")
+        int3004.static(ipv4addr="100.126.1.14", ipv4mask=30)
         int3004.put()
 
 
