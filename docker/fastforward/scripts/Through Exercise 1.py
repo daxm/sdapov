@@ -37,11 +37,11 @@ def main(datafile):
     api = DNACenterAPI(**my_data["dnac"])
 
     # Exercise 1 Steps:
-    initial_discover(api=api, data_vars=my_data)
+    initial_discovery(api=api, data_vars=my_data)
     # testing_stuff(api=api, data_vars=my_data)
 
 
-def initial_discover(api, data_vars):
+def initial_discovery(api, data_vars):
     """
     Perform initial discovery to get cp-border-1, cp-border-2, and edge-1 into DNA Center.
     """
