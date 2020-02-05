@@ -8,7 +8,7 @@ def testing_stuff(api_connection, data_vars):
     if not data_vars:
         print(f"data_vars: {data_vars}")
     # Get tasks
-    asdf = api_connection.sites.get_site(name='global/Bay Area/San Jose-13/SJ-13-2', type='floor')
+    asdf = api_connection.sites.get_site(name='global/Bay Area/San_Jose-13/SJ-13-2', type='floor')
     print(asdf)
 
 
