@@ -40,3 +40,7 @@ devices:
   - name: edge-1.selfserve.lab
     role: ACCESS
     location_name: SJ-13-1
+
+hierarchy:
+    - name: Bay Area
+      type: area

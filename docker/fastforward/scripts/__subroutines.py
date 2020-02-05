@@ -3,19 +3,32 @@ from dnacentersdk import DNACenterAPI
 from time import sleep, perf_counter
 
 
+def testing_stuff(api_connection, data_vars):
+    """Playground to mess with testing API calls."""
+    print(data_vars)
+    # Get tasks
+    print(api_connection.sites.get_site())
+    pass
+
+
 def set_device_role(api_connection, data_vars, devices=[]):
     """Configure the list of devices to their chosen device role."""
 
 
 def provision_devices(api_connection, data_vars, devices=[]):
-    """Provision the list of devices and assign to their heirarchy location."""
+    """Provision the list of devices and assign to their hierarchy location."""
+
+    pass
+
+
+def get_site(api_connection, data_vars, sites=[])
+    """Get site info for listed sites."""
     pass
 
 
 def initial_discovery(api_connection, data_vars):
     """Perform initial discovery to get cp-border-1, cp-border-2, and edge-1 into DNA Center."""
     discovery_wait_timeout = 300
-
     print("Exercise 1: Add Devices to DNA Center")
 
     # Gather IDs for credentials list
@@ -99,14 +112,6 @@ def get_cli_user_id(api_connection, credentials):
         if item["username"] == credentials["username"]:
             return item["id"]
     return 0
-
-
-def testing_stuff(api_connection, data_vars):
-    """Playground to mess with testing API calls."""
-    print(data_vars)
-    # Get tasks
-    print(api_connection.task.get_tasks())
-    pass
 
 
 if __name__ == "__main__":
