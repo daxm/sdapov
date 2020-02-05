@@ -80,7 +80,7 @@ def initial_discovery(api, data_vars):
     number_of_devices_to_find = len(discovery_info["device_names"])
     starttime = perf_counter()
     time_delta = 0
-    while (len(devices_discovered) <= number_of_devices_to_find) or (MAX_WAIT_SEC > time_delta):
+    while (len(devices_discovered) <= number_of_devices_to_find):
         result = api.devices.get_device_list()
         for device in result["response"]:
             if device["hostname"] in discovery_info["device_names"] and device["hostname"] not in devices_discovered:
@@ -90,6 +90,7 @@ def initial_discovery(api, data_vars):
         time_delta = perf_counter() - starttime
         if time_delta > MAX_WAIT_SEC:
             print("\t\tMax wait time met.  Quiting waiting for devices to finish being discovered.")
+            break
 
 
 if __name__ == "__main__":
