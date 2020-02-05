@@ -5,12 +5,13 @@ from time import sleep, perf_counter
 
 def testing_stuff(api_connection, data_vars):
     """Playground to mess with testing API calls."""
-    api_connection.task.get_tasks()
+    if api_connection:
+        pass
     if data_vars:
-        print("passed data_vars.  Meh.")
+        pass
 
-    #asdf = api_connection.sites.get_site(name='SJ-13-2')
-    #print(asdf)
+    # asdf = api_connection.sites.get_site(name='SJ-13-2')
+    # print(asdf)
 
 
 def set_device_role(api_connection, data_vars, devices=[]):
