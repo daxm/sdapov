@@ -7,7 +7,8 @@ def testing_stuff(api_connection, data_vars):
     """Playground to mess with testing API calls."""
     print(f"DATA_VARS = {data_vars}")
     # Get tasks
-    print(api_connection.sites.get_site())
+    asdf = api_connection.sites.get_site()
+    print(type(asdf))
 
 
 def set_device_role(api_connection, data_vars, devices=[]):
