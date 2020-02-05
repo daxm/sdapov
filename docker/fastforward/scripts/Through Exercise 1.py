@@ -45,10 +45,14 @@ def initial_discover(api, data_vars):
     """
     Perform initial discovery to get cp-border-1, cp-border-2, and edge-1 into DNA Center.
     """
+    print("Exercise 1: Add Devices to DNA Center")
+
     # Gather IDs for credentials list
     data_vars["initial_discovery"]["globalCredentialIdList"] = []
+    print("\tCollecting info for CLI credentials.")
     data_vars["initial_discovery"]["globalCredentialIdList"].append(
         get_cli_user_id(api=api, credentials=data_vars["credentials"]["cli"]))
+    print("\tCollecting info for SNMP RO/RW.")
     snmp_info = get_snmp_v2_communities(api=api)
     for item in snmp_info:
         data_vars["initial_discovery"]["globalCredentialIdList"].append(item["id"])
@@ -56,6 +60,7 @@ def initial_discover(api, data_vars):
     discovery_info = data_vars["initial_discovery"]
 
     # Start the Discovery
+    print("\tBuild and start 'Initial Discovery'.")
     result = api.network_discovery.start_discovery(
         discoveryType=discovery_info["discoveryType"],
         preferredMgmtIPMethod=discovery_info["preferredMgmtIPMethod"],
@@ -70,6 +75,7 @@ def initial_discover(api, data_vars):
     check_task_error_state(api=api, task_id=result["response"]["taskId"])
 
     # Wait for discovery to complete
+    print("\tWait for 'Initial Discovery' to finish.")
     devices_discovered = []
     number_of_devices_to_find = len(discovery_info["device_names"])
     starttime = perf_counter()
@@ -78,13 +84,13 @@ def initial_discover(api, data_vars):
         result = api.devices.get_device_list()
         for device in result["response"]:
             if device["hostname"] in discovery_info["device_names"] and device["hostname"] not in devices_discovered:
-                print(f"{device['hostname']} has been added to inventory.")
+                print(f"\t\t{device['hostname']} has been added to inventory.")
                 devices_discovered.append(device["hostname"])
         sleep(5)
         print(result)
         time_delta = perf_counter() - starttime
         if time_delta > MAX_WAIT_SEC:
-            print("Max wait time met.  Quiting waiting for devices to finish being discovered.")
+            print("\t\tMax wait time met.  Quiting waiting for devices to finish being discovered.")
 
 
 if __name__ == "__main__":
