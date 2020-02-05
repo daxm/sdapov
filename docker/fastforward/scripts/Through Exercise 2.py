@@ -5,8 +5,7 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import logging
 from ruamel.yaml import YAML
 from pathlib import Path
-from __subroutines import initial_discovery, provision_devices, set_device_role, testing_stuff
-import locale
+from __subroutines import initial_discovery, provision_devices, set_device_role, assign_devices_to_sites, testing_stuff
 
 # Disable annoying HTTP warnings
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -38,8 +37,9 @@ def main(datafile):
 
     # Exercise 2 Steps:
     devices_to_provision = ["cp-border-1.selfserve.lab", "cp-border-2.selfserve.lab", "edge-1.selfserve.lab"]
-    provision_devices(api_connection=api, data_vars=my_data["devices"], devices=devices_to_provision)
-    set_device_role(api_connection=api, data_vars=my_data["devices"], devices=devices_to_provision)
+    assign_devices_to_sites(api_connection=api, data_vars=my_data["devices"], devices=devices_to_provision)
+    # provision_devices(api_connection=api, data_vars=my_data["devices"], devices=devices_to_provision)
+    # set_device_role(api_connection=api, data_vars=my_data["devices"], devices=devices_to_provision)
 
     testing_stuff(api_connection=api, data_vars=my_data)
 

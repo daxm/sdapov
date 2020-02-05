@@ -14,27 +14,57 @@ def testing_stuff(api_connection, data_vars):
     # print(asdf)
 
 
-def set_device_role(api_connection, data_vars, devices=[]):
-    """Configure the list of devices to their chosen device role."""
+def assign_devices_to_sites(api_connection, data_vars, devices=[]):
+    """Assign the list of devices to their hierarchy location."""
+    # Loop through devices and provision them.
     for device in devices:
+        # Collect this Device's ID from DNA Center.
+        the_device = get_device_by_name(api_connection=api_connection, name=device)
+        # Get info from userdata.yml file regarding this particular device.
         for yaml_device in data_vars:
             if yaml_device["name"] == device:
-                device_info = api_connection.devices.get_device_detail(
-                   identifier="nwDeviceName", search_by="cp-border-1",
-                )
-                print(device_info)
-                #api_connection.devices.update_device_role(id=device_info["response"]["id"], role=yaml_device["role"]')
+                # Get ID of hierarchy location for this device.
+                print(f"Assigning {device} to site {yaml_device['location_name']}")
+                api_connection.sites.assign_device_to_site(
+                    device=the_device,
+                    site_id=api_connection.sites.get_site(name=yaml_device["location_name"])["response"][0]["id"])
+
+
+def get_device_by_name(api_connection, name=None):
+    """Get device info and return response"""
+    devices = api_connection.devices.get_device_list()["response"]
+    for device in devices:
+        if device["name"] == name:
+            return device
+    return 0
+
+
+def set_device_role(api_connection, data_vars, devices=[]):
+    """Configure the list of devices to their chosen device role."""
+    # Loop through our list of devices to set roles.
+    for device in devices:
+        # Collect this Device's ID from DNA Center.
+        device_id = get_device_by_name(api_connection=api_connection, name=device)["id"]
+        # Loop through YAML configured devices to find THIS device.
+        for yaml_device in data_vars:
+            if yaml_device["name"] == device:
+                # Set this device's role.
+                print(f"Setting {device}'s role to {yaml_device['role']}")
+                api_connection.devices.update_device_role(id=device_id, role=yaml_device["role"])
 
 
 def provision_devices(api_connection, data_vars, devices=[]):
     """Provision the list of devices and assign to their hierarchy location."""
     # Loop through devices and provision them.
     for device in devices:
+        # Collect this Device's ID from DNA Center.
+        device_id = get_device_by_name(api_connection=api_connection, name=device)["id"]
         # Get info from userdata.yml file regarding this particular device.
         for yaml_device in data_vars:
             if yaml_device["name"] == device:
                 # Get ID of hierarchy location for this device.
                 location_id = api_connection.sites.get_site(name=yaml_device["location_name"])["response"][0]["id"]
+
 
                 pass
 
