@@ -22,7 +22,8 @@ def set_device_role(api_connection, data_vars, devices=[]):
                 device_info = api_connection.devices.get_device_detail(
                     search_by=device,
                     identifier="nwDeviceName")
-                print(f'api_connection.devices.update_device_role(id={device_info["response"]["id"]}, role={yaml_device["role"]}')
+                print(device_info)
+                #api_connection.devices.update_device_role(id=device_info["response"]["id"], role=yaml_device["role"]')
 
 
 def provision_devices(api_connection, data_vars, devices=[]):
