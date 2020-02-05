@@ -25,7 +25,7 @@ def provision_devices(api_connection, data_vars, devices=[]):
         # Get info from userdata.yml file regarding this particular device.
         for yaml_device in data_vars:
             if yaml_device["name"] == device:
-                location_id = api_connection.get_site(name=yaml_device["location_name"])["response"]["id"]
+                location_id = api_connection.sites.get_site(name=yaml_device["location_name"])["response"]["id"]
                 print(f"Location ID: {location_id}")
                 pass
 
