@@ -16,7 +16,13 @@ def testing_stuff(api_connection, data_vars):
 
 def set_device_role(api_connection, data_vars, devices=[]):
     """Configure the list of devices to their chosen device role."""
-    pass
+    for device in devices:
+        for yaml_device in data_vars:
+            if yaml_device["name"] == device:
+                device_info = api_connection.devices.get_device_detail(
+                    search_by=device["name"],
+                    identifier="nwDeviceName")
+                print(f'api_connection.devices.update_device_role(id={device_info["response"]["id"]}, role={yaml_device["role"]}')
 
 
 def provision_devices(api_connection, data_vars, devices=[]):
@@ -26,8 +32,9 @@ def provision_devices(api_connection, data_vars, devices=[]):
         # Get info from userdata.yml file regarding this particular device.
         for yaml_device in data_vars:
             if yaml_device["name"] == device:
-                site = api_connection.sites.get_site(name=yaml_device["location_name"])["response"][0]["id"]
-                print(f"Location ID: {site}")
+                # Get ID of hierarchy location for this device.
+                location_id = api_connection.sites.get_site(name=yaml_device["location_name"])["response"][0]["id"]
+
                 pass
 
 
