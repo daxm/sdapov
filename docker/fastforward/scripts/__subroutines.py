@@ -20,7 +20,8 @@ def set_device_role(api_connection, data_vars, devices=[]):
 def provision_devices(api_connection, data_vars, devices=[]):
     """Provision the list of devices and assign to their hierarchy location."""
     for device in devices:
-        print(data_vars)
+        if device in data_vars:
+            print(device)
     pass
 
 
