@@ -35,7 +35,7 @@ def get_device_by_name(api_connection, name=None):
     """Get device info and return response"""
     devices = api_connection.devices.get_device_list()["response"]
     for device in devices:
-        if device["name"] == name:
+        if device == name:
             return device
     return 0
 
