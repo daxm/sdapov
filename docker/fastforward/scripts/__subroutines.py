@@ -5,19 +5,18 @@ from time import sleep, perf_counter
 
 def testing_stuff(api_connection, data_vars):
     """Playground to mess with testing API calls."""
-    print(data_vars)
+    print(f"DATA_VARS = {data_vars}")
     # Get tasks
     print(api_connection.sites.get_site())
-    pass
 
 
 def set_device_role(api_connection, data_vars, devices=[]):
     """Configure the list of devices to their chosen device role."""
+    pass
 
 
 def provision_devices(api_connection, data_vars, devices=[]):
     """Provision the list of devices and assign to their hierarchy location."""
-
     pass
 
 
