@@ -5,7 +5,7 @@ MAINTAINER Dax Mickelson (dmickels@cisco.com)
 RUN apt-get -y update
 
 # Install APT-UTILS
-RUN apt-get install -y apt-utils
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils locales
 
 # Running APT DIST-UPGRADE
 RUN apt-get -y dist-upgrade
