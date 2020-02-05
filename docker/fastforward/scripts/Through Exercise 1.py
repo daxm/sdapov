@@ -79,16 +79,14 @@ def initial_discovery(api, data_vars):
     devices_discovered = []
     number_of_devices_to_find = len(discovery_info["device_names"])
     starttime = perf_counter()
-    time_delta = 0
-    while (len(devices_discovered) <= number_of_devices_to_find):
+    while len(devices_discovered) <= number_of_devices_to_find:
         result = api.devices.get_device_list()
         for device in result["response"]:
             if device["hostname"] in discovery_info["device_names"] and device["hostname"] not in devices_discovered:
                 print(f"\t\t{device['hostname']} has been added to inventory.")
                 devices_discovered.append(device["hostname"])
         sleep(5)
-        time_delta = perf_counter() - starttime
-        if time_delta > MAX_WAIT_SEC:
+        if (perf_counter() - starttime) > MAX_WAIT_SEC:
             print("\t\tMax wait time met.  Quiting waiting for devices to finish being discovered.")
             break
 
