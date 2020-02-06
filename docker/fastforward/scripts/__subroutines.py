@@ -20,7 +20,7 @@ def get_execution_info(api_connection, result={}):
     while query["timeDuration"] == 0:
         query = api_connection.custom_caller.call_api('GET', result["executionStatusUrl"])
     if query["status"] == 'FAILURE':
-        print(f"API Call failed with error: {query['bapiError']}")
+        print(f"API call failed with error:\n\t{query['bapiError']}")
     elif query["status"] == 'SUCCESS':
         print(f"API call was a success!")
 
