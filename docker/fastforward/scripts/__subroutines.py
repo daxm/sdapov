@@ -21,8 +21,10 @@ def get_execution_info(api_connection, result={}):
         query = api_connection.custom_caller.call_api('GET', result["executionStatusUrl"])
     if query["status"] == 'FAILURE':
         print(f"API call failed with error:\n\t{query['bapiError']}")
+        return 1
     elif query["status"] == 'SUCCESS':
         print(f"API call was a success!")
+        return 0
 
 
 def assign_devices_to_sites(api_connection, data_vars, devices=[]):
@@ -40,7 +42,8 @@ def assign_devices_to_sites(api_connection, data_vars, devices=[]):
                     device=[the_device],
                     site_id=api_connection.sites.get_site(name=yaml_device["location_name"])["response"][0]["id"])
                 # result contains the "execution ID" and stuff so we can see how this POST is working.
-                get_execution_info(api_connection=api_connection, result=result)
+                if get_execution_info(api_connection=api_connection, result=result):
+                    exit(1)
 
 
 def get_device_by_name(api_connection, name=None):
