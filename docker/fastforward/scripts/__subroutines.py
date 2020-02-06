@@ -17,8 +17,8 @@ def testing_stuff(api_connection, data_vars):
 def get_execution_info(api_connection, result={}):
     """Use the JSON response (aka the result) to dig deeper into the execution status."""
     query = {}
-    query["status"] = 'IN_PROGRESS'
-    while query["status"] == 'IN_PROGRESS':
+    query["endTime"] = ''
+    while query["endTime"] == '':
         query = api_connection.custom_caller.call_api('GET', result["executionStatusUrl"])
     print(query)
     return query
