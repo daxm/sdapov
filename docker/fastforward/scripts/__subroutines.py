@@ -17,7 +17,7 @@ def testing_stuff(api_connection, data_vars):
 def get_execution_stuff(api_connection, result={}):
     """Use the JSON response (aka the result) to dig deeper into the execution status."""
     print(result["executionStatusUrl"])
-    asdf = api_connection.custom_caller.add_api('GET', result["executionStatusUrl"])
+    asdf = api_connection.custom_caller.call_api('GET', result["executionStatusUrl"])
     print(asdf)
     return asdf
 
