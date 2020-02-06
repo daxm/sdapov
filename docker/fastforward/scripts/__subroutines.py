@@ -16,12 +16,13 @@ def testing_stuff(api_connection, data_vars):
 
 def get_execution_info(api_connection, result={}):
     """Use the JSON response (aka the result) to dig deeper into the execution status."""
-    query = {}
-    query["timeDuration"] = 0
+    query = {"timeDuration": 0}
     while query["timeDuration"] == 0:
         query = api_connection.custom_caller.call_api('GET', result["executionStatusUrl"])
-    print(query)
-    return query
+    if query["status"] == 'FAILURE':
+        print(f"API Call failed with error: {query['bapiError']}")
+    elif query["status"] == 'SUCCESS':
+        print(f"API call was a success!")
 
 
 def assign_devices_to_sites(api_connection, data_vars, devices=[]):
