@@ -14,12 +14,9 @@ def testing_stuff(api_connection, data_vars):
     # print(asdf)
 
 
-def get_execution_stuff(api_connection, result={}):
+def get_execution_info(api_connection, result={}):
     """Use the JSON response (aka the result) to dig deeper into the execution status."""
-    print(result["executionStatusUrl"])
-    asdf = api_connection.custom_caller.call_api('GET', result["executionStatusUrl"])
-    print(asdf)
-    return asdf
+    return api_connection.custom_caller.call_api('GET', result["executionStatusUrl"])
 
 
 def assign_devices_to_sites(api_connection, data_vars, devices=[]):
@@ -37,7 +34,7 @@ def assign_devices_to_sites(api_connection, data_vars, devices=[]):
                     device=[the_device],
                     site_id=api_connection.sites.get_site(name=yaml_device["location_name"])["response"][0]["id"])
                 # result contains the "execution ID" and stuff so we can see how this POST is working.
-                print(get_execution_stuff(api_connection=api_connection, result=result))
+                print(get_execution_info(api_connection=api_connection, result=result))
 
 
 def get_device_by_name(api_connection, name=None):
