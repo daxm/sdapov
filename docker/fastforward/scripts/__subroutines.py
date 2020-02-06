@@ -34,7 +34,10 @@ def assign_devices_to_sites(api_connection, data_vars, devices=[]):
                     device=[the_device],
                     site_id=api_connection.sites.get_site(name=yaml_device["location_name"])["response"][0]["id"])
                 # result contains the "execution ID" and stuff so we can see how this POST is working.
-                print(get_execution_info(api_connection=api_connection, result=result))
+                i_say_so = True
+                while i_say_so:
+                    asdf = get_execution_info(api_connection=api_connection, result=result)
+                    print(asdf)
 
 
 def get_device_by_name(api_connection, name=None):
