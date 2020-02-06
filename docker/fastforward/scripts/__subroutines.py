@@ -1,5 +1,5 @@
 """Subroutines related to Network Discovery API; to be used in main programs."""
-from dnacentersdk import DNACenterAPI
+from dnacentersdk import DNACenterAPI, api
 from time import sleep, perf_counter
 
 
@@ -12,6 +12,11 @@ def testing_stuff(api_connection, data_vars):
 
     # asdf = api_connection.sites.get_site(name='SJ-13-2')
     # print(asdf)
+
+
+def get_execution_stuff(api_connection, result={}):
+    """Use the JSON response (aka the result) to dig deeper into the execution status."""
+    return api_connection.custom_caller.add_api('GET', result["executionStatusUrl"])
 
 
 def assign_devices_to_sites(api_connection, data_vars, devices=[]):
@@ -28,7 +33,8 @@ def assign_devices_to_sites(api_connection, data_vars, devices=[]):
                 result = api_connection.sites.assign_device_to_site(
                     device=[the_device],
                     site_id=api_connection.sites.get_site(name=yaml_device["location_name"])["response"][0]["id"])
-                print(result)
+                # result contains the "execution ID" and stuff so we can see how this POST is working.
+                print(get_execution_stuff(api_connection=api_connection, result=result))
 
 
 def get_device_by_name(api_connection, name=None):
