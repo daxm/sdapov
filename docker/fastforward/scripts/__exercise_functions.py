@@ -14,7 +14,7 @@ def assign_devices_to_sites(api_connection, data_vars, devices=[]):
     for device in devices:
         # Collect this Device's ID from DNA Center.
         the_device = get_device_by_name(api_connection=api_connection, name=device)
-        print(f"The Device: {the_device}")
+        print(f"The Device: {the_device['id']}")
         # Get info from userdata.yml file regarding this particular device.
         for yaml_device in data_vars:
             if yaml_device["name"] == device:
