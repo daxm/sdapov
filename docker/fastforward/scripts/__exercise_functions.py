@@ -4,7 +4,7 @@ Subroutines that are common (not Exercise specific) are housed in __helper_funct
 """
 from dnacentersdk import DNACenterAPI, api
 from time import sleep, perf_counter
-from __helper_functions import testing_stuff, get_execution_info, get_device_by_name, get_site, get_cli_user_id, \
+from __helper_functions import testing_stuff, get_execution_info, get_device_by_name, get_site_by_name, get_cli_user_id, \
     get_snmp_v2_communities, check_task_error_state
 
 
@@ -20,7 +20,8 @@ def assign_devices_to_sites(api_connection, data_vars, devices=[]):
                 print(f"Assigning {device} to site {yaml_device['location_name']}")
                 result = api_connection.sites.assign_device_to_site(
                     device=the_device,
-                    site_id=api_connection.sites.get_site(name=yaml_device["location_name"])["response"][0]["id"])
+                    site_id=get_site_by_name(api_connection=api_connection, name=yaml_device["location_name"])
+                )
                 # result contains the "execution ID" and stuff so we can see how this POST is working.
                 get_execution_info(api_connection=api_connection, result=result)
 
@@ -49,7 +50,7 @@ def provision_devices(api_connection, data_vars, devices=[]):
         for yaml_device in data_vars:
             if yaml_device["name"] == device:
                 # Get ID of hierarchy location for this device.
-                location_id = api_connection.sites.get_site(name=yaml_device["location_name"])["response"][0]["id"]
+                location_id = api_connection.sites.get_site_by_name(name=yaml_device["location_name"])["response"][0]["id"]
 
 
                 pass

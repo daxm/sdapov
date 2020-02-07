@@ -31,10 +31,9 @@ def get_device_by_name(api_connection, name=None):
     return api_connection.devices.get_device_list(hostname=name)["response"][0]
 
 
-def get_site(api_connection, data_vars, sites=[]):
+def get_site_by_name(api_connection, data_vars, sites=[]):
     """Get site info for listed sites."""
-    pass
-
+    return api_connection.sites.get_site_by_name(name=name)["response"][0]
 
 def check_task_error_state(api_connection, task_id=None):
     """Check whether given task_id has errored."""
