@@ -13,10 +13,11 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 def main(datafile):
     """Run the program."""
+    bordering = "=" * 15
     print("\n\n\n")
-    print("="*15)
+    print(bordering)
     print("Starting program")
-    print("="*15)
+    print(bordering)
 
     # Grab the data from the yaml file.
     yaml = YAML(typ="safe")
@@ -41,7 +42,9 @@ def main(datafile):
     # provision_devices(api_connection=api, data_vars=my_data["devices"], devices=devices_to_provision)
     # set_device_role(api_connection=api, data_vars=my_data["devices"], devices=devices_to_provision)
 
+    print(bordering)
     print("Automation script has completed, exiting.")
+    print(bordering)
 
 
 if __name__ == "__main__":
