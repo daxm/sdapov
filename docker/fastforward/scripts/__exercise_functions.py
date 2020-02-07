@@ -16,6 +16,7 @@ def assign_devices_to_sites(api_connection, data_vars, devices=[]):
         for yaml_device in data_vars:
             if yaml_device["name"] == device:
                 print(f"Assigning {device} to site {yaml_device['location_name']}")
+                print(get_device_by_name(api_connection=api_connection, name=device))
                 result = api_connection.sites.assign_device_to_site(
                     device=[get_device_by_name(api_connection=api_connection, name=device)],
                     site_id=get_site_by_name(api_connection=api_connection, name=yaml_device["location_name"])["id"],
