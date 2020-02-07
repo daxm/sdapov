@@ -19,7 +19,7 @@ def assign_devices_to_sites(api_connection, data_vars, devices=[]):
             if yaml_device["name"] == device:
                 print(f"Assigning {device} to site {yaml_device['location_name']}")
                 result = api_connection.sites.assign_device_to_site(
-                    device=the_device,
+                    device=[the_device],
                     site_id=get_site_by_name(api_connection=api_connection, name=yaml_device["location_name"])["id"]
                 )
                 # result contains the "execution ID" and stuff so we can see how this POST is working.
