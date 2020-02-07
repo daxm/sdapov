@@ -33,7 +33,8 @@ def get_device_by_name(api_connection, name=None):
 
 def get_site_by_name(api_connection, name=None):
     """Get site info for listed sites."""
-    return api_connection.sites.get_site_by_name(name=name)["response"][0]
+    return api_connection.sites.get_site(name=name)["response"][0]
+
 
 def check_task_error_state(api_connection, task_id=None):
     """Check whether given task_id has errored."""
