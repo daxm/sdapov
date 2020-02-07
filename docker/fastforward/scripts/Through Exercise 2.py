@@ -5,7 +5,7 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import logging
 from ruamel.yaml import YAML
 from pathlib import Path
-from __subroutines import initial_discovery, provision_devices, set_device_role, assign_devices_to_sites, testing_stuff
+from __exercise_functions import initial_discovery, provision_devices, set_device_role, assign_devices_to_sites
 
 # Disable annoying HTTP warnings
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -40,8 +40,6 @@ def main(datafile):
     assign_devices_to_sites(api_connection=api, data_vars=my_data["devices"], devices=devices_to_provision)
     # provision_devices(api_connection=api, data_vars=my_data["devices"], devices=devices_to_provision)
     # set_device_role(api_connection=api, data_vars=my_data["devices"], devices=devices_to_provision)
-
-    testing_stuff(api_connection=api, data_vars=my_data)
 
     print("Automation script has completed, exiting.")
 
