@@ -28,7 +28,7 @@ def get_execution_info(api_connection, result={}):
 
 def get_device_by_name(api_connection, name=None):
     """Get device info and return response"""
-    return api_connection.devices.get_device_list(hostname=name)["response"]
+    return api_connection.devices.get_device_list(hostname=name)["response"][0]
 
 
 def get_site(api_connection, data_vars, sites=[]):
