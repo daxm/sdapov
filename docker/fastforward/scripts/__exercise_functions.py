@@ -48,7 +48,7 @@ def provision_devices(api_connection, data_vars, devices=[]):
         for yaml_device in data_vars:
             if yaml_device["name"] == device:
                 # Get ID of hierarchy location for this device.
-                location_id = api_connection.sites.get_site_by_name(name=yaml_device["location_name"])["response"][0]["id"]
+                location_id = api_connection.sites.get_site_by_name(name=yaml_device["location_name"])["id"]
                 pass
 
 
