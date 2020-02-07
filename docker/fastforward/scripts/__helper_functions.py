@@ -31,7 +31,7 @@ def get_device_by_name(api_connection, name=None):
     return api_connection.devices.get_device_list(hostname=name)["response"][0]
 
 
-def get_site_by_name(api_connection, data_vars, sites=[]):
+def get_site_by_name(api_connection, name=None):
     """Get site info for listed sites."""
     return api_connection.sites.get_site_by_name(name=name)["response"][0]
 
