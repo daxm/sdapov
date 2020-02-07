@@ -12,17 +12,13 @@ def assign_devices_to_sites(api_connection, data_vars, devices=[]):
     """Assign the list of devices to their hierarchy location."""
     # Loop through devices and provision them.
     for device in devices:
-        # Collect this Device's ID from DNA Center.
-        the_device = get_device_by_name(api_connection=api_connection, name=device)
         # Get info from userdata.yml file regarding this particular device.
         for yaml_device in data_vars:
             if yaml_device["name"] == device:
                 print(f"Assigning {device} to site {yaml_device['location_name']}")
-                site_id = get_site_by_name(api_connection=api_connection, name=yaml_device["location_name"])["id"]
-                print(f"site_id = {site_id}")
                 result = api_connection.sites.assign_device_to_site(
-                    device=[the_device],
-                    site_id=site_id,
+                    device=[get_device_by_name(api_connection=api_connection, name=device)],
+                    site_id=get_site_by_name(api_connection=api_connection, name=yaml_device["location_name"])["id"],
                 )
                 # result contains the "execution ID" and stuff so we can see how this POST is working.
                 get_execution_info(api_connection=api_connection, result=result)
