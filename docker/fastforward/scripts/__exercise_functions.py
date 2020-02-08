@@ -22,8 +22,6 @@ def assign_devices_to_sites(api_connection, data_vars, devices=[]):
                     ],
                     site_id=get_site_by_name(api_connection=api_connection, name=yaml_device["location_name"])["id"],
                 )
-                # result contains the "execution ID" and stuff so we can see how this POST is working.
-                get_execution_info(api_connection=api_connection, result=result)
 
 
 def set_device_role(api_connection, data_vars, devices=[]):
