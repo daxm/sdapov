@@ -35,7 +35,10 @@ def provision_devices(api_connection, data_vars, devices=[]):
                       "liable to change/break in future releases of DNA Center!")
                 # Get ID of hierarchy location for this device.
                 location_id = api_connection.sites.get_site_by_name(name=yaml_device["location_name"])["id"]
-                pass
+
+                # result contains the "execution ID" and stuff so we can see how this POST is working.
+                result = ""
+                get_execution_info(api_connection=api_connection, result=result)
 
 
 def assign_devices_to_sites(api_connection, data_vars, devices=[]):
