@@ -15,11 +15,11 @@ def assign_devices_to_sites(api_connection, data_vars, devices=[]):
         # Get info from userdata.yml file regarding this particular device.
         for yaml_device in data_vars:
             if yaml_device["name"] == device:
-                my_device = get_device_by_name(api_connection=api_connection, name=device)
-                print(f"My Device ==> {my_device['managementIpAddress']}")
                 print(f"Assigning {device} to site {yaml_device['location_name']}")
                 result = api_connection.sites.assign_device_to_site(
-                    device=[],
+                    device=[
+                        {"ip": get_device_by_name(api_connection=api_connection, name=device)['managementIpAddress']},
+                    ],
                     site_id=get_site_by_name(api_connection=api_connection, name=yaml_device["location_name"])["id"],
                 )
                 # result contains the "execution ID" and stuff so we can see how this POST is working.
