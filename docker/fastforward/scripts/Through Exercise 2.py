@@ -39,7 +39,7 @@ def main(datafile):
     # Exercise 2 Steps:
     devices_to_provision = ["cp-border-1.selfserve.lab", "cp-border-2.selfserve.lab", "edge-1.selfserve.lab"]
     assign_devices_to_sites(api_connection=api, data_vars=my_data["devices"], devices=devices_to_provision)
-    # provision_devices(api_connection=api, data_vars=my_data["devices"], devices=devices_to_provision)
+    provision_devices(api_connection=api, data_vars=my_data["devices"], devices=devices_to_provision)
     # set_device_role(api_connection=api, data_vars=my_data["devices"], devices=devices_to_provision)
 
     print(bordering)

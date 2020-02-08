@@ -8,22 +8,6 @@ from __helper_functions import testing_stuff, get_execution_info, get_device_by_
     get_snmp_v2_communities, check_task_error_state
 
 
-def assign_devices_to_sites(api_connection, data_vars, devices=[]):
-    """Assign the list of devices to their hierarchy location."""
-    # Loop through devices and provision them.
-    for device in devices:
-        # Get info from userdata.yml file regarding this particular device.
-        for yaml_device in data_vars:
-            if yaml_device["name"] == device:
-                print(f"Assigning {device} to site {yaml_device['location_name']}")
-                result = api_connection.sites.assign_device_to_site(
-                    device=[
-                        {"ip": get_device_by_name(api_connection=api_connection, name=device)['managementIpAddress']},
-                    ],
-                    site_id=get_site_by_name(api_connection=api_connection, name=yaml_device["location_name"])["id"],
-                )
-
-
 def set_device_role(api_connection, data_vars, devices=[]):
     """Configure the list of devices to their chosen device role."""
     # Loop through our list of devices to set roles.
@@ -52,6 +36,22 @@ def provision_devices(api_connection, data_vars, devices=[]):
                 # Get ID of hierarchy location for this device.
                 location_id = api_connection.sites.get_site_by_name(name=yaml_device["location_name"])["id"]
                 pass
+
+
+def assign_devices_to_sites(api_connection, data_vars, devices=[]):
+    """Assign the list of devices to their hierarchy location."""
+    # Loop through devices and provision them.
+    for device in devices:
+        # Get info from userdata.yml file regarding this particular device.
+        for yaml_device in data_vars:
+            if yaml_device["name"] == device:
+                print(f"Assigning {device} to site {yaml_device['location_name']}")
+                result = api_connection.sites.assign_device_to_site(
+                    device=[
+                        {"ip": get_device_by_name(api_connection=api_connection, name=device)['managementIpAddress']},
+                    ],
+                    site_id=get_site_by_name(api_connection=api_connection, name=yaml_device["location_name"])["id"],
+                )
 
 
 def initial_discovery(api_connection, data_vars):
