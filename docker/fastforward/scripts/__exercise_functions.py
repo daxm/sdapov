@@ -47,6 +47,8 @@ def provision_devices(api_connection, data_vars, devices=[]):
         # Get info from userdata.yml file regarding this particular device.
         for yaml_device in data_vars:
             if yaml_device["name"] == device:
+                print("WARNING -- WARNING -- WARNING\n\tThis DNA Center API feature is not officially published and is "
+                      "liable to change/break in future releases of DNA Center!")
                 # Get ID of hierarchy location for this device.
                 location_id = api_connection.sites.get_site_by_name(name=yaml_device["location_name"])["id"]
                 pass
