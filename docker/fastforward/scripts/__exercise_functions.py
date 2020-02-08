@@ -34,7 +34,7 @@ def provision_devices(api_connection, data_vars, devices=[]):
                 print("WARNING -- WARNING -- WARNING\n\tThis DNA Center API feature is not officially published and is "
                       "liable to change/break in future releases of DNA Center!")
                 # Get ID of hierarchy location for this device.
-                location_id = api_connection.sites.get_site_by_name(name=yaml_device["location_name"])["id"]
+                location_id = get_site_by_name(api_connection=api_connection, name=yaml_device["location_name"])["id"]
 
                 # result contains the "execution ID" and stuff so we can see how this POST is working.
                 result = ""
