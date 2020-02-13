@@ -107,10 +107,11 @@ def main():
         ftd1.regKey = "C1sco12345"
         ftd1.acp(name="Restricted-VN-Initial-Policy")
         ftd1.name = "FTD"
-        ftd1.licensing(action="add", name="MALWARE")
-        ftd1.licensing(action="add", name="VPN")
         ftd1.licensing(action="add", name="BASE")
+        ftd1.licensing(action="add", name="MALWARE")
+        ftd1.licensing(action="add", name="URLFilter")
         ftd1.licensing(action="add", name="THREAT")
+        ftd1.licensing(action="add", name="VPN")
         ftd1.licensing(action="add", name="URL")
         # Push to FMC to start device registration.
         ftd1.post(post_wait_time=300)
