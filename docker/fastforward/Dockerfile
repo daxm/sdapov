@@ -4,8 +4,8 @@ MAINTAINER Dax Mickelson (dmickels@cisco.com)
 # Configure Script and GIT variables
 ENV CODE_REPO https://github.com/daxm/sdapov.git
 ENV GIT_BRANCH dev
-ENV WORK_DIR /usr/src/app
 ENV SCRIPT_PATH $WORK_DIR/sdapov/docker/fastforward
+ENV WORK_DIR /usr/src/app
 ENV PYTHON_SCRIPT bootstrap.py
 
 # Clone repos.

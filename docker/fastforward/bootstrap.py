@@ -9,6 +9,7 @@ files_in_dir = os.listdir(script_dir)
 
 list_of_scripts = []
 # Ensure that we only show the python files.  (Those ending in .py)
+# Exclude any files that start with "__".  This way you can have local "helper" scripts to import.
 for file in files_in_dir:
     if file[-3:] == ".py" and "__" not in file:
         list_of_scripts.append(file)
