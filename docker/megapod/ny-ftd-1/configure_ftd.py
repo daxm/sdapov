@@ -8,7 +8,7 @@ def main():
     with fmcapi.FMC(
         host="10.100.64.120",
         username="apiadmin",
-        password="C1sco12345",
+        password="Cocos2020",
         autodeploy=True,
     ) as fmc:
 

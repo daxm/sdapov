@@ -104,7 +104,7 @@ def main():
         # Add FTD device to FMC
         ftd1 = fmcapi.DeviceRecords(fmc=fmc1)
         ftd1.hostName = "100.127.100.15"
-        ftd1.regKey = "Cocos2020"
+        ftd1.regKey = "C1sco12345"
         ftd1.acp(name="Restricted-VN-Initial-Policy")
         ftd1.name = "FTD"
         ftd1.licensing(action="add", name="BASE")
