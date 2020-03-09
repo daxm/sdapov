@@ -8,7 +8,7 @@ def main():
     with fmcapi.FMC(
         host="10.100.64.120",
         username="apiadmin",
-        password="C1sco12345",
+        password="Cocos2020",
         autodeploy=True,
     ) as fmc:
 
@@ -29,7 +29,7 @@ def main():
         # Register nj-ftd-1 to FMC
         ftd = fmcapi.DeviceRecords(fmc=fmc)
         ftd.hostName = "10.100.255.82"  # FIXME
-        ftd.regKey = "Cocos2020"
+        ftd.regKey = "C1sco12345"
         ftd.acp(name=acp.name)
         ftd.name = "nj-ftd-1"
         ftd.licensing(action="add", name="BASE")
