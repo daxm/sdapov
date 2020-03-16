@@ -32,6 +32,8 @@ def main():
         example_org_network.post()
         fusion_gw = fmcapi.Hosts(fmc=fmc, name="Fusion_GW", value="10.100.255.81")
         fusion_gw.post()
+        nycftd_gw = fmcapi.Hosts(fmc=fmc, name="NYC_GW", value="100.64.2.1")
+        nycftd_gw.post()
 
         # Create Access Control Policy Rules
         init_rule = fmcapi.AccessRules(
@@ -82,7 +84,8 @@ def main():
         g1.get(name="GigabitEthernet0/1")
         g1.enabled = True
         g1.ifname = "OUT"
-        g1.dhcp(enableDefault=True, routeMetric=1)
+        g1.static(ipv4addr="100.64.2.2", ipv4mask=24)
+        # g1.dhcp(enableDefault=True, routeMetric=1)
         g1.sz(name=sz_outside.name)
         g1.put()
 
@@ -94,6 +97,13 @@ def main():
         lan_route.interfaceName = g0.ifname
         lan_route.metricValue = 1
         lan_route.post()
+        wan_route = fmcapi.IPv4StaticRoutes(fmc=fmc, name="DefaultRoute")
+        wan_route.device(device_name=ftd.name)
+        wan_route.networks(action="add", networks=['0.0.0.0/0'])
+        wan_route.gw(name=nycftd_gw.name)
+        wan_route.interfaceName = g1.ifname
+        wan_route.metricValue = 1
+        wan_route.post()
 
         # Associate NAT Policy with ny-ftd-1
         devices = [{"name": ftd.name, "type": "device"}]
